@@ -1,0 +1,12 @@
+@import url(../../app.component.scss);
+
+.iss-container {
+    display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: wrap;
+    position: relative; width: 100%; min-height: 100vh;
+    padding: 4em 0 1em 0;    
+
+    iframe {
+        width: 80%; height: 550px;
+        border-radius: 5px; border: 2px solid var(--roseRed);
+    }    
+}

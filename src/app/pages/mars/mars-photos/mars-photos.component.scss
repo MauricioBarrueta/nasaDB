@@ -1,0 +1,80 @@
+@import url(../../../app.component.scss);
+
+.photos-container, .mission-subtitle, .inputs-container, .select-container {
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+}
+.photos-container {
+    width: 100%; min-height: 100vh; position: relative; 
+    justify-content: flex-start; padding: 4em 0 1em 0;
+
+    .mission-subtitle {
+        width: 100%; flex-wrap: nowrap; flex-direction: row;
+        padding: 0.5rem; text-align: center; color: var(--white);
+        background: rgba(252, 60, 35, .8); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+
+        p {
+            font-size: 14px; line-height: 2; font-weight: bold;
+            border-right: 3px double var(--roseRed); padding: 0 1em;
+            &:last-child { border-right: none; }
+            span {
+                text-decoration: underline dotted 2px; font-weight: normal;
+                user-select: all; cursor: copy;
+                &::selection { background: var(--smookyBlack); }
+            }         
+        }
+    }
+
+    .container-title { padding: 5px 0.5rem; }
+
+    .inputs-container, .photo-info {
+        backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+        background-color: rgba(255, 255, 255, 0.15); 
+    }
+    .inputs-container {
+        width: 100%; flex-direction: row; flex-wrap: wrap;
+        padding: 0.5rem; text-align: center;   
+        label, input { height: 35px; font-weight: bold; }
+        label {
+            display: ruby; margin: 0 5px 0 0;
+            font-size: 18px; line-height: 2;
+            color: var(--white);         
+            img {
+                margin-bottom: 5px; filter: drop-shadow(0 0 2px var(--smookyBlack));
+            }   
+        }
+        input {
+            width: 250px;
+            font-size: 14px; text-align: center; font-weight: bold;
+            background-color: rgba($color: white, $alpha: .5); color: var(--smookyBlack) !important;
+            margin: 0 35px 0 0; border-radius: 5px; padding: 0 5px; cursor: pointer;
+            &:last-child { margin: 0; }     
+            &::placeholder {
+                font-weight: normal;
+                color: var(--roseRed); opacity: 1;
+            }       
+        }
+    }
+    
+    .select-container {
+        width: 100%;    
+        .input-group {
+            width: fit-content;            
+            .dropdown-toggle {
+                font-size: 14px; font-weight: bold; text-transform: none;
+                background-color: var(--roseRed); color: var(--white);
+                margin-top: 5px;
+            }
+            .dropdown-menu {
+                li {
+                    border-bottom: 1px dotted var(--smookyBlack);
+                    &:last-child { border-bottom: 0; }
+                    a {
+                        font-size: 13px;
+                        color: var(--smookyBlack); transition: .25s; cursor: pointer;
+                        &:hover { color: var(--oriolesOrange); }
+                    }
+                }
+            }            
+        }
+    }
+}

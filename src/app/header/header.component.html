@@ -1,0 +1,40 @@
+<nav>
+  <div class="nav-wrapper">
+    <a href="https://api.nasa.gov/" target="_blank" class="brand-logo nav-text" title="NASA Open APIs">
+      Powered by <img src="/NASA.png">
+    </a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse nav-text"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li>
+        <a [href]="['astronomy/picture-of-the-day']"><img src="/observatory.png"> Imagen Astronómica del día</a>
+      </li>
+      <li>
+        <a [href]="['dscovr-satellite/epic-camera']"><img src="/satellite.png"> Cámara de Imágenes Policromáticas Terrestres</a>
+      </li>      
+      <li>
+        <a [href]="['mars-exploration/photos']"><img src="/mars.png"> Exploración en Marte</a>
+      </li>
+      <li>
+        <a [href]="['tracking/international-space-station']"><img src="/ISS.png"> Seguimiento de la ISS</a>
+      </li>      
+    </ul>
+  </div>
+</nav>
+<!-- Side Navbar -->
+<ul class="side-nav" id="mobile-demo">
+  <span class="brand-logo nav-text">Barra de navegación</span>
+  <li>
+    <a [href]="['astronomy/picture-of-the-day']"><img src="/observatory.png"> Imagen Astronómica del día</a>
+  </li>
+  <li>
+    <a [href]="['dscovr-satellite/epic-camera']"><img src="/satellite.png"> Cámara de Imágenes Policromáticas Terrestres</a>
+  </li>
+  <li>
+    <a [href]="['mars-exploration/photos']"><img src="/mars.png"> Exploración en Marte</a>
+  </li>
+  <li>
+    <a [href]="['tracking/international-space-station']"><img src="/ISS.png"> Seguimiento de la ISS</a>
+  </li>
+</ul>
+
+          

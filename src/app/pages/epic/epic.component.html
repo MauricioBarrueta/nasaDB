@@ -1,0 +1,30 @@
+<app-header></app-header>
+
+<div class="epic-container">
+    <h1 class="title"><img src="/earth.png"> Fotografías tomadas por la Cámara de Imágenes Policromaticas Terrestres (EPIC) del satélite DSCOVR <img src="/dscovr.png"></h1>
+
+    <span class="container-title">Lista de fotografías de la Tierra capturadas aproximadamente a 1 500 000 km de distancia:
+        <small>Presiona las teclas &#x2190; y &#x2192; o los botones a los lados para ver todas las imágenes</small>
+    </span>
+    <div id="earthPhotos" class="carousel slidecarousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->
+          <button type="button" data-bs-target="#earthPhotos" *ngFor="let epic of epic$; let i = index" aria-current="true"
+            attr.data-bs-slide-to="{{i}}" [ngClass]="i == 0 ? 'active' : ''"  attr.aria-label="Slide {{i}}">
+          </button>        
+        </div>    
+        <div class="carousel-inner">
+          <!--* Agrega la clase 'active' solamente al primer elemento -->
+          <div *ngFor="let image of imageData$; let i = index" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'" data-bs-interval="10000">
+            <span class="photo-info">&#xf017; {{image.date}} | Posición del DSCOVR en el espacio: Lat. {{image.lat}}, Lon. {{image.lon}}</span>
+            <img src="{{image.src}}" class="d-block w-100" [loading]="i >= 2 ? 'lazy' : ''">
+            <span class="photo-info caption">{{image.caption}}</span>
+          </div> 
+        </div>   
+        <button class="carousel-control-prev" type="button" data-bs-target="#earthPhotos" data-bs-slide="prev">&#xf053;</button>
+        <button class="carousel-control-next" type="button" data-bs-target="#earthPhotos" data-bs-slide="next">&#xf054;</button> 
+    </div>
+    <a class="container-title page-link" target="_blank" href="https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/dscovr-deep-space-climate-observatory">
+        ¿Deseas saber más sobre el satélite Deep Space Climate Observatory (DSCOVR)? Haz clic acá &#xf245;
+    </a>       
+</div>

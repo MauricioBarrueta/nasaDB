@@ -1,0 +1,24 @@
+@import url(../../app.component.scss);
+
+.epic-container {
+    display: flex; align-items: center; justify-content: center; flex-wrap: wrap; flex-direction: row;
+    position: relative; width: 100%; min-height: 100vh; 
+    padding: 4em 0 0 0;
+
+    .page-link {
+        text-decoration: none; line-height: 2;
+        border-bottom: 0; border-top: 5px double var(--oriolesOrange); 
+        margin: 10px 0 auto; padding: 10px 0; transition: all 0.35s;
+        &:hover {
+            letter-spacing: 1px;
+        }
+    }
+   
+    .carousel-item {
+        width: 550px;                
+        .photo-info, .caption { font-size: 10px !important; }
+        .caption {
+            bottom: 5px !important; top: revert !important;             
+        }
+    }   
+}
