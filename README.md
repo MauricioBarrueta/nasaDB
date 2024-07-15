@@ -1,3 +1,11 @@
+🇲🇽 Sitio web que consume algunas de las API más populares proporcionadas por la NASA, entre sus funciones se encuentra la de poder consultar las imágenes tomadas durante las misiones de exploración a Marte, en donde se pueden filtrar mediante una fecha o día marciano, siempre y cuando se encuentren dentro del rango de la misión, o también, la de poder rastrear la ubicación actual de la Estación Espacial Internacional en tiempo real, entre otras.
+
+🇺🇸 This website, which consumes some of the most popular APIs provided by NASA, among its functions is that of being able to consult the images taken during Mars Rover exploration missions, where it's possible to filter by date or Martian day, as long as they are within the range of the mission, or also to track the current location of the International Space Station (ISS) in real time, to mention a few.
+
+
+![nasa](https://github.com/user-attachments/assets/5b49cf11-094c-4015-8968-bf93d03d3399)
+
+
 # NasaDB
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
