@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { IssService } from './service/iss.service';
 import { catchError, Subject, takeUntil, tap, throwError } from 'rxjs';
 import { Iss } from './interface/iss';
+import { setInterval } from 'timers';
 
 @Component({
   selector: 'app-iss',
@@ -10,11 +11,10 @@ import { Iss } from './interface/iss';
 })
 export class ISSComponent implements OnInit, OnDestroy {  
   
-  constructor(private issService: IssService) { }  
+  constructor(private issService: IssService) {}   
 
-  data$!: string[]
-  lat!: string
-  lon!: string
+  lat!: number
+  lon!: number
   latText!: string 
   lonText!: string 
   src!: string  
@@ -40,17 +40,17 @@ export class ISSComponent implements OnInit, OnDestroy {
       }),
       //? -- Al ser llamado el método onDestroy, automáticamente se desuscribe del Observable, para ahorrar memoria
       takeUntil(this.onDestroy),
-      tap((res: Iss) => {      
-        this.lat = res.iss_position.latitude
-        this.latText = this.lat.includes('-') ? 'Sur' : 'Norte'
+      tap((res: Iss) => {    
+        this.lat = res.latitude  
+        this.latText = this.lat.toString().includes('-') ? 'Sur' : 'Norte'
 
-        this.lon = res.iss_position.longitude
-        this.lonText = this.lon.includes('-') ? 'Oeste' : 'Este'
+        this.lon = res.longitude
+        this.lonText = this.lon.toString().includes('-') ? 'Oeste' : 'Este'
 
-        this.src = `https://maps.google.com/maps?q=${parseFloat(this.lat)},${parseFloat(this.lon)}&t=h&z=2&hl=es&ie=UTF8&iwloc=&output=embed`
+        this.src = `https://maps.google.com/maps?q=${this.lat},${this.lon}&t=h&z=2&hl=es&ie=UTF8&iwloc=&output=embed`
       })
     )
     .subscribe()    
-  }
+  }  
 }
 

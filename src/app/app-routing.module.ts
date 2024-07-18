@@ -8,12 +8,14 @@ import { ISSComponent } from './pages/iss/iss.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'astronomy/picture-of-the-day', pathMatch: 'full' },
+
   { path: 'astronomy/picture-of-the-day', component: APODComponent},
   { path: 'dscovr-satellite/epic-camera', component: EpicComponent },
   { path: 'mars-exploration/photos', component: MarsComponent }, 
   { path: 'mars-exploration/photos/mission', component: MarsPhotosComponent },
   { path: 'tracking/international-space-station', component: ISSComponent }, 
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+
+  { path: '**', redirectTo: 'astronomy/picture-of-the-day', pathMatch: 'full' }
 ];
 
 @NgModule({

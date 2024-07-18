@@ -1,10 +1,16 @@
 export interface Iss {
-    message: string
+    name: string
+    id: number
+    latitude: number
+    longitude: number
+    altitude: number
+    velocity: number
+    visibility: string
+    footprint: number
     timestamp: number
-    iss_position: IssPosition
+    daynum: number
+    solar_lat: number
+    solar_lon: number
+    units: string
 }
   
-export interface IssPosition {
-    latitude: string
-    longitude: string
-}
