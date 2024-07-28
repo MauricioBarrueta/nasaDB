@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { APODService } from './service/apod.service';
 import { catchError, Subject, takeUntil, tap, throwError } from 'rxjs';
 import { APOD } from './interface/apod';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apod',
@@ -11,7 +12,7 @@ import { APOD } from './interface/apod';
 
 export class APODComponent implements OnInit, OnDestroy {
 
-  constructor(private readonly apodService: APODService) {}
+  constructor(private readonly apodService: APODService, private router: Router) {}
 
   apod$!: APOD
   mediaType!: string //* Para validar si es imagen o video
@@ -22,7 +23,8 @@ export class APODComponent implements OnInit, OnDestroy {
   //? -- Los Subject sirven de 'puente' entre los Observables y las Subscripciones
   private readonly onDestroy = new Subject<void>();
   
-  ngOnInit(): void {    
+  ngOnInit(): void { 
+    this.router.navigate(['astronomy/picture-of-the-day'])
     this.getPictureOfTheDay()       
   }
 
