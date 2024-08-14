@@ -12,8 +12,8 @@ export class APODService {
   constructor(private http: HttpClient) { }
 
   /* Se obtiene la imagen astronómica del día (APOD por sus siglas en inglés) */
-  getPictureOfTheDay(): Observable<APOD> {
-    return this.http.get<APOD>(`${environment.url}planetary/apod?api_key=${environment.key}`)
+  getPictureOfTheDay(date: string): Observable<APOD> {
+    return this.http.get<APOD>(`${environment.url}planetary/apod?date=${date}&api_key=${environment.key}`)
       .pipe(
         map((res: APOD) => { return res })
       )

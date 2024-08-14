@@ -15,7 +15,7 @@
         </div>    
         <div class="carousel-inner">
           <!--* Agrega la clase 'active' solamente al primer elemento -->
-          <div *ngFor="let image of imageData$; let i = index" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'" data-bs-interval="10000">
+          <div *ngFor="let image of imageData$; let i = index" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'">
             <span class="photo-info">&#xf017; {{image.date}} | Posición del DSCOVR en el espacio: Lat. {{image.lat}}, Lon. {{image.lon}}</span>
             <img src="{{image.src}}" class="d-block w-100" [loading]="i >= 2 ? 'lazy' : ''">
             <span class="photo-info caption">{{image.caption}}</span>

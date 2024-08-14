@@ -75,7 +75,6 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
     this.validEarthDate = event.target.value > this.manifest.max_date ? (event.target.value = event.target.value.slice(0, length - 1), false) : true    
   }
 
-  //! DESHABILITAR EL BOTÓN HASTA QUE REGRESE UN RESULTADO. YA SEA FOTOS O MENSAJE DE VACÍO
   /* Obtiene el valor seleccionado en la lista desplegable y lo asigna a la variable */
   errorMessage!: string
   onDropdownClick(item: string, index: number) {

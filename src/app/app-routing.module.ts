@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'mars-exploration/photos/mission', component: MarsPhotosComponent },
   { path: 'tracking/international-space-station', component: ISSComponent }, 
 
-  { path: '**', redirectTo: 'astronomy/picture-of-the-day', pathMatch: 'full' }
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
