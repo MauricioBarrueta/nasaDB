@@ -44,7 +44,7 @@ export class EpicComponent implements OnInit, OnDestroy {
           this.dateQuery = photo.date.substring(0, 10).split('-').join('/') //* YYYY/mm/dd
           //* Se inyecta la información de cada foto en un arreglo
           this.imageData$.push({ 
-            src: `${environment.url}EPIC/archive/natural/${this.dateQuery}/png/${photo.image}.png?api_key=${environment.key}`,
+            src: `${environment.epicUrl}archive/natural/${this.dateQuery}/png/${photo.image}.png`,
             date: photo.date,
             lat: photo.coords.dscovr_j2000_position.y,
             lon: photo.coords.dscovr_j2000_position.x,

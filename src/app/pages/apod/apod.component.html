@@ -1,14 +1,15 @@
 <app-header></app-header>
 
 <div class="card-container">
-    <h1 class="title"><img src="/observatory.png"> {{title}} <img src="/galaxy.png"></h1>
+    <h1 class="title"><img src="/galaxy.png">&nbsp; {{title}} &nbsp;<img src="/observatory.png"></h1>
 
     <div class="card">
         <div class="card-image">
-            <img *ngIf="mediaType !== 'video';else videoMedia" src="{{apod$.url}}">
+            <img *ngIf="mediaType !== 'video';else videoMedia;" src="{{apod$.url}}">
             <ng-template #videoMedia> <!-- Video Media Template -->
                 <iframe width="100%" height="400px" [src]="mediaVideoUrl | safe" frameborder="0" allow="autoplay"></iframe>            
             </ng-template>
+            <img *ngIf="apod$.media_type === 'other'" src="https://www.its.ac.id/tmesin/wp-content/uploads/sites/22/2022/07/no-image.png">
             <span class="card-title">{{apod$.title}}</span>
         </div>
         <div class="card-content">

@@ -48,14 +48,12 @@ export class APODComponent implements OnInit, OnDestroy {
       //? -- Al ser llamado el método onDestroy, automáticamente se desuscribe del Observable, para ahorrar memoria
       takeUntil(this.onDestroy),
       tap((res: APOD) => {
-        this.apod$ = res
+        this.apod$ = res        
         this.mediaType = this.apod$.media_type    
-        this.title = this.mediaType !== 'video' ? 'Esta es la imagen astronómica del día de hoy'
-          : 'Este es el video astronómico del día de hoy'     
+        this.title = this.mediaType !== 'video' ? 'Esta es la imagen astronómica del día de hoy' : 'Este es el video astronómico del día de hoy'     
         this.mediaVideoUrl = `${this.apod$.url}?autoplay=1&mute=1&enablejsapi=1`
       })
     )
     .subscribe()    
   }
-
 }

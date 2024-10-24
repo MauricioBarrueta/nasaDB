@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
-import { PhotoManifest, PhotoManifestResponse } from '../mars-photos/interface/photo-manifest';
+import { Rover, PhotoManifestResponse } from '../mars-photos/interface/photo-manifest';
 import { MarsPhotos, MarsResponse } from '../interface/mars-photos';
 
 @Injectable({
@@ -13,11 +13,11 @@ export class MarsService {
   constructor(private http: HttpClient) { }
 
   /* Obtiene el Manifest (datos) dependiendo el Rover que se seleccionó */
-  getRoverManifest(rover: string): Observable<PhotoManifest[]> {
-    return this.http.get<PhotoManifestResponse>(`${environment.url}mars-photos/api/v1/manifests/${rover}/?api_key=${environment.key}`)
+  getRoverManifest(rover: string): Observable<Rover> {
+    return this.http.get<PhotoManifestResponse>(`${environment.url}mars-photos/api/v1/rovers/${rover}/?api_key=${environment.key}`)
       .pipe(
         map((res: PhotoManifestResponse) => {
-          return res.photo_manifest
+          return res.rover
         })
       )
   }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MarsService } from '../service/mars.service';
-import { PhotoManifest } from './interface/photo-manifest';
+import { Rover } from './interface/photo-manifest';
 import { catchError, finalize, Subject, takeUntil, tap, throwError } from 'rxjs';
 import { MarsPhotos } from '../interface/mars-photos';
 import { environment } from '../../../../environments/environment.development';
@@ -56,7 +56,7 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
       }),
       //?-- Al ser llamado el método onDestroy, automáticamente se desuscribe del Observable, para ahorrar memoria
       takeUntil(this.onDestroy),
-      tap((res: PhotoManifest[]) => {
+      tap((res: Rover) => {
         this.manifest = res
       })
     )

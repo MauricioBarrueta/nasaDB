@@ -3,7 +3,7 @@
 .card-container {
     display: flex; justify-content: center; align-items: center; flex-wrap: wrap; flex-direction: row;
     position: relative; width: 100%; min-height: 100vh; 
-    padding: 4em 0 1em 0;
+    padding: 4.5rem 0 1em 0;
 
     .card {
         width: 650px;
@@ -33,8 +33,8 @@
             background-color: rgba(186, 30, 104, .8); color: white !important;
             a {
                 font-size: 14px; text-decoration: none !important; text-transform: none !important; font-weight: bold;
-                color: white !important; margin: 0; transition: 0.35s;
-                &:hover { letter-spacing: 1px; }
+                color: white !important; margin: 0; transition: 0.35s !important;
+                &:hover { font-weight: normal !important; }
                 img {
                     width: 20px; height: 20px;
                     margin-bottom: 2px; filter: invert(100%); 
