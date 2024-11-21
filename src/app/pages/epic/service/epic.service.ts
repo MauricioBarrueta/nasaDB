@@ -13,7 +13,7 @@ export class EpicService {
 
   /* Obtiene la lista de imágenes del EPIC */
   getListByNaturalQuery(): Observable<Epic[]> {
-    return this.http.get<Epic[]>(`${environment.epicUrl}api/natural `)
+    return this.http.get<Epic[]>(`${environment.epicUrl}api/natural`)
       .pipe(
         map((res: Epic[]) => {
           return res
