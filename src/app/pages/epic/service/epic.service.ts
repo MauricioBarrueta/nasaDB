@@ -12,8 +12,8 @@ export class EpicService {
   constructor(private http: HttpClient) { }
 
   /* Obtiene la lista de imágenes del EPIC */
-  getListByNaturalQuery(): Observable<Epic[]> {
-    return this.http.get<Epic[]>(`${environment.epicUrl}api/natural`)
+  getListByNaturalQuery(date: string): Observable<Epic[]> {
+    return this.http.get<Epic[]>(`${environment.url}EPIC/api/natural/date/${date}?api_key=${environment.key}`)
       .pipe(
         map((res: Epic[]) => {
           return res

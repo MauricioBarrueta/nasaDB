@@ -6,7 +6,8 @@
     <span class="container-title">Lista de fotografías de la Tierra capturadas aproximadamente a 1,500,000 km de distancia con fecha {{dateQuery}}:
         <small>Presiona las teclas &#x2190; y &#x2192; o los botones a los lados para ver todas las imágenes</small>
     </span>
-    <div id="earthPhotos" class="carousel slide">
+
+    <div id="earthPhotos" class="carousel slide carousel-fade">
         <div class="carousel-indicators">
           <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->
           <button type="button" data-bs-target="#earthPhotos" *ngFor="let epic of epic$; let i = index" aria-current="true"
