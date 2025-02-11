@@ -48,3 +48,22 @@
     .carousel-control-prev { border-radius: 0 5px 5px 0; }
     .carousel-control-next { border-radius: 5px 0 0 5px; }
 } 
+
+@media screen and (max-width: 1176px) {
+    .title { 
+        font-size: 14px; 
+        padding-inline: 1em;
+    }    
+}
+@media screen and (max-width: 1060px) {
+    .container-title {
+        margin-top: 2em; font-size: 13px;
+        small { font-size: 11px; }
+    }    
+}
+@media screen and (max-width: 670px) {
+    .title { font-size: 12px; }
+    .carousel {
+        .carousel-control-next, .carousel-control-prev { font-size: 20px; }
+    }    
+}

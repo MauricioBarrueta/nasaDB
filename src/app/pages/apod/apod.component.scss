@@ -47,3 +47,16 @@
         }        
     }
 }
+
+@media screen and (max-width: 768px) {
+    .card-container {
+        padding-inline: 1.5rem;
+        .card { 
+            margin-top: 2.5rem; 
+            .card-content, .card-action {
+                .text, .copyright, a { font-size: 12px; }
+            }
+            .card-action { padding: 0.75rem; } 
+        }
+    }    
+}

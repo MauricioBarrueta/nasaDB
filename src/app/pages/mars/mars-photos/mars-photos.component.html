@@ -7,12 +7,12 @@
         <p>Aterrizaje: <span>{{manifest.landing_date}}</span></p>
         <p>Último día terrestre: <span>{{manifest.max_date}}</span></p>
         <p>Último día marciano: <span>{{manifest.max_sol}}</span></p>
-        <p>Estatus: <span>{{manifest.status}}</span></p>       
+        <p>Estatus: <span>{{manifest.status}}</span></p>               
     </div>
     
     <!-- Inputs -->
-    <span class="container-title">1. Ingresa una fecha terrestre o un día marciano para obtener las imágenes obtenidas en ese tiempo, recuerda que puede que el rover 
-      {{rover[0].toUpperCase()+rover.slice(1)}} no haya tomado ninguna imagen en la fecha ingresada:</span>    
+    <span class="container-title">1. Ingresa una fecha terrestre o día marciano para mostrar las imágenes capturadas en ese periodo, recuerda que existe la posibilidad 
+      de que el rover {{rover[0].toUpperCase()+rover.slice(1)}} no haya tomado ninguna fotografía en la fecha que ingreses:</span>    
       <div class="inputs-container">
         <label for="earth-date-input" class="form-label"><img src="/earth.png"> Fecha terrestre:</label>
         <input type="text" id="earth-date-input" class="form-control" max="{{manifest.max_date}}" min="{{manifest.landing_date}}" [(ngModel)]="earthDateValue" 
@@ -25,8 +25,8 @@
     </div>
 
     <!-- Cameras List -->
-    <span class="container-title sub">2. Selecciona cualquiera de las cámaras disponibles del rover. Si la que elegiste no contiene ninguna imagen, intenta seleccionando 
-      otra cámara o ingresa una fecha diferente:<small>&#xf05a; Puede que algunas imágenes tarden un poco en cargar. Por favor, espere un momento después de haber seleccionado la cámara.</small>
+    <span class="container-title sub">2. Selecciona cualquier cámara del rover para mostrar las imágenes, si la que elegiste no capturó nada en ese momento, 
+      intenta seleccionando otra o ingresa una fecha diferente:<small>&#xf05a; Puede que algunas imágenes tarden un poco en cargar, si es el caso, espere un momento después de haber seleccionado la cámara.</small>
     </span>
     <div class="select-container">
         <div class="input-group" *ngIf="rover === 'spirit' || rover === 'opportunity';else curiosity">
@@ -54,7 +54,7 @@
 
     <span class="error-message" *ngIf="solDateValue === -1 || !solDateValue && earthDateValue === '' || !earthDateValue">{{errorMessage}}</span>
 
-    <div id="marsPhotosCarousel" class="carousel slide">
+    <div id="marsPhotosCarousel" class="carousel slide carousel-fade">
       <div class="carousel-indicators">
         <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->
         <button type="button" data-bs-target="#marsPhotosCarousel" *ngFor="let photos of photos$; let i = index" attr.data-bs-slide-to="{{i}}" 

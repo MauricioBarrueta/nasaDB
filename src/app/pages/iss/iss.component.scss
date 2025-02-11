@@ -14,3 +14,16 @@
         margin-top: 1em; border-radius: 5px; border: 2px solid var(--roseRed);
     }       
 }
+
+@media screen and (max-width: 1095px) {
+    .iss-container {
+        .container-title { padding-inline: 1em; margin-top: 0; }
+    }    
+}
+@media screen and (max-width: 732px) {
+    .iss-container {
+        padding-inline: 1em;
+        .container-title { margin-top: 2.25rem; }
+        iframe { width: 100%; }
+    }
+}

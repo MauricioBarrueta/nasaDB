@@ -3,6 +3,7 @@ import { EpicService } from './service/epic.service';
 import { catchError, Subject, takeUntil, tap, throwError } from 'rxjs';
 import { Epic } from './interface/epic';
 import { environment } from '../../../environments/environment.development';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-epic',
@@ -11,17 +12,18 @@ import { environment } from '../../../environments/environment.development';
 })
 export class EpicComponent implements OnInit, OnDestroy {
 
-  constructor(private epicService: EpicService) { }  
+  constructor(private epicService: EpicService, private datePipe: DatePipe) { }  
 
   epic$: Epic[] = []
   imageData$: any[] = []
   dateQuery!: string
-  prevDate: string = ''
+  dateParam: any
 
   ngOnInit(): void {
-    var date = new Date();
-    date.setDate(date.getDate() - 1);
-    this.prevDate = date.toISOString().split('T')[0]  
+    var date = new Date()    
+    date.setDate(date.getDate() - 1) // Para obtener la fecha anterior a la actual, el URL de la API así lo requiere*
+    var prevDate = date.toLocaleString('en-US', { timeZone: 'America/Mexico_City' })
+    this.dateParam = this.datePipe.transform(prevDate, 'yyyy-MM-dd')
     
     this.getDataByDate()
   }
@@ -34,7 +36,7 @@ export class EpicComponent implements OnInit, OnDestroy {
   }  
 
   getDataByDate() {
-    this.epicService.getListByNaturalQuery(this.prevDate)
+    this.epicService.getListByNaturalQuery(this.dateParam)
     .pipe(
       catchError(error => {
         return throwError(() => error)

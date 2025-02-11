@@ -9,9 +9,7 @@ nav, .side-nav {
     .nav-wrapper {
         width: 100%;
         display: inline-flex; vertical-align: middle; justify-content: right;
-        line-height: 5;
-        a { text-decoration: none !important; }
-      
+        line-height: 5;      
         .nav-text { 
             left: 0; border-right: 0;
             font-size: 9px; letter-spacing: -0.5px;
@@ -22,20 +20,15 @@ nav, .side-nav {
 }
 /* Side Navbar */
 .side-nav {
-    border-right: 2px solid var(--oriolesOrange); 
-    .nav-text {
-        width: 100%; display: inline-block;
-        background-color: var(--smookyBlack);
-        padding: 0.5rem; margin-bottom: 10px; border-radius: 5px 5px 0 0;
-        text-align: center; font-size: 18px; text-transform: uppercase;  
-    }
+    padding: 1em;
+    border-left: 2px solid var(--oriolesOrange);     
     li {
+        padding: 1.5rem 1em; cursor: pointer;
         border-bottom: 2px solid var(--oriolesOrange); border-right: 0;
         &:last-child { border-bottom: 0; }
         a { 
-            height: fit-content !important;
-            text-decoration: none !important; line-height: 2.8;
-            padding: 0.5rem; color: white;            
+            height: auto; padding: 0; 
+            color: #FFF;
         }
     }   
 }
@@ -54,3 +47,13 @@ li, .nav-text {
         }
     }
 }  
+
+@media only screen and (max-width: 1260px) {
+    .visible-list { display: none !important; }
+    .button-collapse { display: initial !important; }
+}
+@media only screen and (max-width: 930px) {
+    .side-nav {
+        width: 80% !important;        
+    }
+}

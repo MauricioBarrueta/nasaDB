@@ -4,7 +4,9 @@
     <h1 class="title"><img src="ISS-2.png">&nbsp; Seguimiento de la Estación Espacial Internacional en tiempo real &nbsp;<img src="/ISS.png"></h1>
 
     <span class="container-title">La ISS actualmente se encuentra en las coordenadas: {{lat}} {{latText}}, {{lon}} {{lonText}}.
-        <small>&#xf05a; Puedes mover el mapa y ajustar el zoom. Para actualizar la información, simplemente coloca el puntero &#xf245; sobre el mapa</small>        
+        <small>Para mover da clic sobre el mapa y sostenlo, para ajustar el zoom presiona la tecla Ctrl + scroll del mouse, para actualizar la información, 
+            simplemente vuelve a colocar el puntero &#xf245; sobre el mapa.
+        </small>        
     </span>  
     
     <iframe (mouseenter)="getIssCurrLoc()" [src]="src|safe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></iframe>    

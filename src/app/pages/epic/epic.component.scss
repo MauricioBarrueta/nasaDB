@@ -23,3 +23,13 @@
         .caption { bottom: 5px !important; top: revert !important; }
     }   
 }
+
+@media screen and (max-width: 670px) {
+    .container-title { margin-top: 3.25rem; }
+    .carousel {
+        padding-inline: 1em;
+        .carousel-inner {
+            .carousel-item { width: 100%; }
+        }
+    }
+}

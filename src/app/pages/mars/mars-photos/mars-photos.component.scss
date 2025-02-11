@@ -13,7 +13,7 @@
     .mission-subtitle {
         width: 100%; flex-wrap: wrap; flex-direction: row;
         text-align: center; color: var(--white);
-        padding: 0.5rem 0.5rem 0.7rem 0.5rem; text-align: center; color: var(--white);
+        padding: 0.5rem 0.5rem 0.7rem 0.5rem;
         p {
             font-size: 15px; line-height: 2; font-weight: bold;
             border-right: 3px double var(--midnightBlue); padding: 0 1em;
@@ -76,4 +76,47 @@
             }            
         }
     }
+}
+
+@media screen and (max-width: 1060px) {
+    .photos-container {
+        .mission-subtitle {
+            padding: .35rem;
+            p {
+                font-size: 13px; 
+                span { font-size: 12px; }
+            }
+        }
+        .container-title { margin-top: 0; }
+    }
+}
+@media screen and (max-width: 990px) {
+    .photos-container {       
+        .inputs-container {
+            padding: 0 1em auto;
+            label, input { width: 45%; margin: 0; }
+            label:nth-child(3), input:nth-child(4) { margin-top: 15px; }
+            label { font-size: 16px; } input { font-size: 13px; }
+        }        
+    }
+    
+}
+@media screen and (max-width: 700px) {
+    .carousel {
+        .carousel-inner {
+            .carousel-item { width: 100%; padding: 1em; }
+        }
+    }
+}
+@media screen and (max-width: 480px) {
+    .photos-container {
+        .mission-subtitle {
+            align-items: flex-start; flex-direction: column;
+            margin: 5px 0 15px 0;
+            p { border: 0; }
+        }
+        .inputs-container {
+            label { font-size: 14px; }
+        }
+    }    
 }

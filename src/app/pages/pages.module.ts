@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { APODComponent } from './apod/apod.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +23,8 @@ import { ISSComponent } from './iss/iss.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    DatePipe
   ],
   exports: [
     RouterModule,
@@ -36,7 +37,8 @@ import { ISSComponent } from './iss/iss.component';
     ISSComponent
   ],
   providers: [
-    provideHttpClient()
+    provideHttpClient(),
+    DatePipe
   ]
 })
 export class PagesModule { }
