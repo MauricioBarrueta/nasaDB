@@ -4,8 +4,7 @@
 
 🔗 https://nasadb-2fe0e.web.app/astronomy/picture-of-the-day
 
-
-![nasa](https://github.com/user-attachments/assets/58c47d10-5ad0-409f-892b-2f94c4cb44e1)
+![nasa](https://github.com/user-attachments/assets/53a4e7ed-da7b-4114-92c1-c93ccf9bdc0d)
 
 
 # NasaDB
