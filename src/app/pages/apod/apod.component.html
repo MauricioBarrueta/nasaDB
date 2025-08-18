@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<div class="card-container">
-    <h1 class="title"><img src="/galaxy.png">&nbsp; {{title}} &nbsp;<img src="/observatory.png"></h1>
+<div class="card-container w-100 max-vh-100 position-relative">
+    <h1 class="title"><img src="/observatory-2.png">&nbsp; {{title}} &nbsp;<img src="/galaxy.png"></h1>
 
     <div class="card">
         <div class="card-image">
@@ -9,20 +9,21 @@
             <ng-template #videoMedia> <!-- Video Media Template -->
                 <iframe width="100%" height="400px" [src]="mediaVideoUrl | safe" frameborder="0" allow="autoplay"></iframe>            
             </ng-template>
-            <img *ngIf="apod$.media_type === 'other'" src="https://www.its.ac.id/tmesin/wp-content/uploads/sites/22/2022/07/no-image.png">
-            <span class="card-title">{{apod$.title}}</span>
+            <img *ngIf="apod$.media_type === 'other' || apod$.media_type === undefined" src="https://www.its.ac.id/tmesin/wp-content/uploads/sites/22/2022/07/no-image.png">
+             
+            <span class="card-title py-2 px-3">{{apod$.title}}</span>
         </div>
-        <div class="card-content">
-            <p class="copyright" *ngIf="apod$.copyright !== undefined;else emptyCopyright">&copy; {{apod$.date.substring(0,4)}} {{apod$.copyright}}</p>            
+        <div class="card-content p-3">
+            <p class="copyright text-center pb-2 mb-1" *ngIf="apod$.copyright !== undefined;else emptyCopyright">&copy; {{apod$.date.substring(0,4)}} {{apod$.copyright}}</p>            
             <p class="text">{{apod$.explanation}}</p>    
 
-            <ng-template #emptyCopyright><p class="copyright">&copy; {{apod$.date.substring(0,4)}} NASA</p></ng-template>        
+            <ng-template #emptyCopyright><p class="copyright text-center pb-1 mb-1">&copy; {{apod$.date.substring(0,4)}} NASA</p></ng-template>        
         </div>        
 
-        <div class="card-action">
-            <a *ngIf="mediaType !== 'video';else videoURL" [href]="apod$.hdurl" target="_blank">Ver imagen en alta definición &#xf08e;</a>
+        <div class="card-action p-3">
+            <a class="m-0" *ngIf="mediaType !== 'video';else videoURL" [href]="apod$.hdurl" target="_blank"><i class="fa-solid fa-magnifying-glass-plus"></i> Abrir imagen en HD</a>
             <ng-template #videoURL> <!-- Video Media Template -->
-                <a [href]="mediaVideoUrl" target="_blank">Ver video en YouTube &#xf167;</a>
+                <a class="m-0" [href]="mediaVideoUrl" target="_blank">&#xf167; Ver video en YouTube</a>
             </ng-template>
             <p id="img-date">Fecha: {{apod$.date}}</p>
         </div>

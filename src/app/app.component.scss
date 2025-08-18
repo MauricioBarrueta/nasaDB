@@ -20,6 +20,7 @@
         font-size: 13px; letter-spacing: 1px; padding-top: 10px;
     }
 } 
+.error-alert-txt { font-size: 11px; letter-spacing: 1px; font-weight: bold; color: var(--oriolesOrange); }
 
 .error-message {
     width: 100%; padding: 5px 5px 10px 5px; 
@@ -28,16 +29,14 @@
 }
 
 .carousel {
-    height: auto; 
     .carousel-inner {
         .carousel-item {
-            padding-top: 1em;
-            width: 650px; height: 100%; position: relative; left: 50%; 
+            width: 650px; left: 50%; padding-top: 1em;             
             transform: translateX(-50%); transition: all .35s;
             img { border-radius: 5px; border: 2px solid var(--roseRed); }
             .photo-info {
-                width: 99%; position: absolute; top: 18px; left: 3px;
-                color: white; text-align: center; font-size: 11px; font-weight: bold; line-height: 2;
+                width: 99%; top: 18px; left: 3px;
+                font-size: 11px; font-weight: bold; line-height: 2; color: white; 
             }
         }
     }

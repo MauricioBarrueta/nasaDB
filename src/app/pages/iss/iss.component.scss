@@ -1,17 +1,16 @@
 @import url(../../app.component.scss);
 
 .iss-container {
-    display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: wrap;
-    position: relative; width: 100%; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: wrap;   
     padding: 4em 0 1em 0;   
-    .container-title {
+    .container-title, iframe {
         backdrop-filter: blur(2px) !important; -webkit-backdrop-filter: blur(2px) !important;
-        background-color: rgba(255, 255, 255, 0.15); 
+        background-color: rgba(255, 255, 255, 0.15) !important; 
     } 
 
     iframe {
         width: 80%; height: 550px;
-        margin-top: 1em; border-radius: 5px; border: 2px solid var(--roseRed);
+        border: 2px solid var(--roseRed);
     }       
 }
 

@@ -1,25 +1,25 @@
 <app-header></app-header>
 
 <div class="rovers-cards-container">   
-    <h1 class="title"><img src="/rover.png">&nbsp; Selecciona cualquiera de los rovers para ver las imágenes obtenidas durante su misión en el planeta Marte &nbsp;<img src="/mars.png"></h1>
+    <h1 class="title"><img src="/rover.png">&nbsp; Selecciona un rover para explorar las imágenes capturadas durante su misión en Marte &nbsp;<img src="/mars.png"></h1>
 
     <div class="card">
         <div class="card-image">
-            <img src="/opportunity-spirit.webp" (click)="getSelectedRover('spirit')">
+            <img class="img-shadow" src="/opportunity-spirit.webp" (click)="getSelectedRover('spirit')">
         </div>    
         <span class="card-title">Rover Spirit <small>&#xf7c0; 2004 - &#xf54c; 2011</small></span>
     </div>
 
     <div class="card">
         <div class="card-image">
-            <img src="/opportunity-spirit.webp" (click)="getSelectedRover('opportunity')">
+            <img class="img-shadow" src="/opportunity-spirit.webp" (click)="getSelectedRover('opportunity')">
         </div>    
         <span class="card-title">Rover Opportunity <small>&#xf7c0; 2004 - &#xf54c; 2018</small></span>
     </div>
     
     <div class="card">
         <div class="card-image">
-            <img src="/curiosity.png" style="scale: 1.3;" (click)="getSelectedRover('curiosity')">
+            <img class="img-shadow" src="/curiosity.webp" style="scale: 0.7;" (click)="getSelectedRover('curiosity')">
         </div>    
         <span class="card-title">Rover Curiosity <small>&#xf7c0; 2012 - </small></span>
     </div>

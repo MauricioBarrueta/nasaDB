@@ -1,21 +1,21 @@
 export interface PhotoManifestResponse {
-    rover: Rover
+  photo_manifest: PhotoManifest
 }
-  
-export interface Rover {
-    id: number
-    name: string
-    landing_date: string
-    launch_date: string
-    status: string
-    max_sol: number
-    max_date: string
-    total_photos: number
-    cameras: Camera[]
+
+export interface PhotoManifest {
+  name: string
+  landing_date: string
+  launch_date: string
+  status: string
+  max_sol: number
+  max_date: string
+  total_photos: number
+  photos: Photo[]
 }
-  
-export interface Camera {
-    name: string
-    full_name: string
+
+export interface Photo {
+  sol: number
+  earth_date: string
+  total_photos: number
+  cameras: string[]
 }
-  

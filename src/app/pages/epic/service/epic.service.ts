@@ -11,9 +11,19 @@ export class EpicService {
 
   constructor(private http: HttpClient) { }
 
-  /* Obtiene la lista de imágenes del EPIC */
-  getListByNaturalQuery(date: string): Observable<Epic[]> {
-    return this.http.get<Epic[]>(`${environment.url}EPIC/api/natural/date/${date}?api_key=${environment.key}`)
+  /* Para obtener las imágenes capturadas en el día más reciente disponible */
+  getLastImages() {
+    return this.http.get<Epic[]>(`${environment.epicUrl}`)
+      .pipe(
+        map((res: Epic[]) => {
+          return res
+        })
+      )
+  }
+
+  /* Para obtener las imágenes capturadas el día anterior a la fecha actual */
+  getImagesByDate(date: string): Observable<Epic[]> {
+    return this.http.get<Epic[]>(`${environment.epicUrl}/date/${date}`)
       .pipe(
         map((res: Epic[]) => {
           return res

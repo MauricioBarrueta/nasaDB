@@ -1,13 +1,13 @@
 <app-header></app-header>
 
-<div class="epic-container">
-    <h1 class="title"><img src="/earth.png">&nbsp; Fotografías tomadas por la Cámara de Imágenes Policromaticas Terrestres (EPIC) del satélite DSCOVR &nbsp;<img src="/dscovr.png"></h1>
+<div class="epic-container w-100 min-vh-100 position-relative">
+    <h1 class="title"><img src="/earth.png">&nbsp; Fotografías tomadas por la cámara EPIC (Earth Polychromatic Imaging Camera) del satélite DSCOVR &nbsp;<img src="/dscovr.png"></h1>
 
-    <span class="container-title">Lista de fotografías de la Tierra capturadas aproximadamente a 1,500,000 km de distancia con fecha {{dateQuery}}:
-        <small>Presiona las teclas &#x2190; y &#x2192; o los botones a los lados para ver todas las imágenes</small>
+    <span class="container-title">Lista de fotografías de la Tierra capturadas a aproximadamente 1 500 000 km de distancia, correspondientes a la fecha {{dateQuery}}:
+        <small>Presiona las teclas &#x2190; y &#x2192; o los botones laterales para recorrer todas las imágenes</small>
     </span>
-
-    <div id="earthPhotos" class="carousel slide carousel-fade">
+    <small class="error-alert-txt w-100 pt-3 text-center" [ngClass]="alertText ? 'd-inline-block' : 'd-none'">&#xf071; Ocurrió un error en la API al obtener las imágenes más recientes, se están mostrando las últimas disponibles &#xf06a;</small>
+    <div id="earthPhotos" class="carousel slide carousel-fade h-auto">
         <div class="carousel-indicators">
           <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->
           <button type="button" data-bs-target="#earthPhotos" *ngFor="let epic of epic$; let i = index" aria-current="true"
@@ -16,10 +16,10 @@
         </div>    
         <div class="carousel-inner">
           <!--* Agrega la clase 'active' solamente al primer elemento -->
-          <div *ngFor="let image of imageData$; let i = index" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'">
-            <span class="photo-info">&#xf017; {{image.date}} | Posición del DSCOVR en el espacio: Lat. {{image.lat}}, Lon. {{image.lon}}</span>
+          <div *ngFor="let image of imageData$; let i = index" class="h-100 position-relative" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'">
+            <span class="photo-info position-absolute text-center">&#xf017; {{image.date}} | Posición del DSCOVR en el espacio: Lat. {{image.lat}}, Lon. {{image.lon}}</span>
             <img src="{{image.src}}" class="d-block w-100">
-            <span class="photo-info caption">{{image.caption}}</span>
+            <span class="photo-info position-absolute text-center caption">{{image.caption}}</span>
           </div> 
         </div>   
         <button class="carousel-control-prev" type="button" data-bs-target="#earthPhotos" data-bs-slide="prev">&#xf053;</button>

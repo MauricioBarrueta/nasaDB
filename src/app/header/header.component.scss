@@ -2,12 +2,9 @@
 nav, .side-nav {
     display: inline-table;
     backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
-    background: rgba(186, 30, 104, .8); color: white;
-    border-bottom: 2px solid var(--oriolesOrange); margin-bottom: 10px;
-    padding: 0.5rem;
+    background: rgba(186, 30, 104, .8); color: white; border-bottom: 2px solid var(--oriolesOrange);     
 
     .nav-wrapper {
-        width: 100%;
         display: inline-flex; vertical-align: middle; justify-content: right;
         line-height: 5;      
         .nav-text { 
@@ -20,11 +17,11 @@ nav, .side-nav {
 }
 /* Side Navbar */
 .side-nav {
-    padding: 1em;
+    // padding: 1em;
     border-left: 2px solid var(--oriolesOrange);     
     li {
         padding: 1.5rem 1em; cursor: pointer;
-        border-bottom: 2px solid var(--oriolesOrange); border-right: 0;
+        border-bottom: 2px solid rgba(252, 60, 35, .35); border-right: 0;
         &:last-child { border-bottom: 0; }
         a { 
             height: auto; padding: 0; 
@@ -35,7 +32,7 @@ nav, .side-nav {
 
 /* Globales */
 li, .nav-text {
-    border-right: 4px double var(--oriolesOrange);
+    border-right: 4px double rgba(252, 60, 35, .35);
     &:last-child { border-right: 0; }
     &:hover img { transform: rotate(10deg); scale: 1.1; }
     a { 

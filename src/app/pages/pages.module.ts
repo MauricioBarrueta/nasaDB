@@ -24,7 +24,8 @@ import { ISSComponent } from './iss/iss.component';
   imports: [
     CommonModule,
     FormsModule,
-    DatePipe
+    DatePipe,
+    RouterModule
   ],
   exports: [
     RouterModule,

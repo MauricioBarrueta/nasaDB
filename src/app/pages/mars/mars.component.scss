@@ -10,9 +10,10 @@
         padding: 1em; text-align: center;        
         backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
         background-color: rgba(255, 255, 255, 0.15) !important; 
-
+       
         .card-image {
-            transform: translateY(-90px); margin: 0;
+            transform: translateY(-90px); margin: 0;            
+            .img-shadow { filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, .6)); }
             img {                
                 width: 100%; scale: .9;
                 transition: 0.45s; cursor: pointer;

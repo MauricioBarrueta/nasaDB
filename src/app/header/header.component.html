@@ -1,38 +1,38 @@
-<nav>
-  <div class="nav-wrapper">
+<nav class="mb-2 p-2">
+  <div class="nav-wrapper w-100">
     <a href="https://api.nasa.gov/" target="_blank" class="brand-logo nav-text" title="NASA Open APIs">
-      Powered by <img src="/NASA.png">
+      Powered by <img src="/NASA.webp">
     </a>
     <a href="#" data-activates="mobile-demo" class="button-collapse nav-text"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down visible-list">
       <li>
-        <a [href]="['astronomy/picture-of-the-day']"><img src="/observatory.png"> Imagen Astronómica del día</a>
+        <a [routerLink]="['/astronomy/picture-of-the-day']"><img src="/observatory.png"> Imagen Astronómica del día</a>
       </li>
       <li>
-        <a [href]="['dscovr-satellite/epic-camera']"><img src="/satellite.png"> Cámara de Imágenes Policromáticas Terrestres</a>
+        <a [routerLink]="['/dscovr-satellite/epic-camera']"><img src="/satellite.png"> Cámara Policromática Terrestre</a>
       </li>      
       <li>
-        <a [href]="['mars-exploration/photos']"><img src="/mars.png"> Exploración en Marte</a>
+        <a [routerLink]="['/mars-exploration/photos']"><img src="/mars.png"> Exploración en Marte</a>
       </li>
       <li>
-        <a [href]="['tracking/international-space-station']"><img src="/ISS.png"> Seguimiento de la ISS</a>
+        <a [routerLink]="['/tracking/international-space-station']"><img src="/ISS.png"> Seguimiento de la EEI</a>
       </li>      
     </ul>
   </div>
 </nav>
 <!-- Side Navbar -->
-<ul class="side-nav" id="mobile-demo">
+<ul class="side-nav mb-2 p-3" id="mobile-demo">
   <li>
-    <a [href]="['astronomy/picture-of-the-day']"><img src="/observatory.png"> Imagen Astronómica del día</a>
+    <a [routerLink]="['/astronomy/picture-of-the-day']"><img src="/observatory.png"> Imagen Astronómica del día</a>
   </li>
   <li>
-    <a [href]="['dscovr-satellite/epic-camera']"><img src="/satellite.png"> Cámara de Imágenes Policromáticas Terrestres</a>
+    <a [routerLink]="['/dscovr-satellite/epic-camera']"><img src="/satellite.png"> Cámara Policromática Terrestre</a>
   </li>
   <li>
-    <a [href]="['mars-exploration/photos']"><img src="/mars.png"> Exploración en Marte</a>
+    <a [routerLink]="['/mars-exploration/photos']"><img src="/mars.png"> Exploración en Marte</a>
   </li>
   <li>
-    <a [href]="['tracking/international-space-station']"><img src="/ISS.png"> Seguimiento de la ISS</a>
+    <a [routerLink]="['/tracking/international-space-station']"><img src="/ISS.png"> Seguimiento de la EEI</a>
   </li>
 </ul>
 
