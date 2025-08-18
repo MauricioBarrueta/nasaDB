@@ -1,11 +1,11 @@
-🇲🇽 Este sitio web permite consultar algunas de las API más populares proporcionadas por la NASA, entre ellas se encuentra la que muestra las imágenes tomadas durante las misiones de exploración a Marte, donde se pueden filtrar mediante una fecha o día marciano, siempre y cuando se encuentren dentro del rango de la misión, o la que permite rastrear la ubicación actual de la Estación Espacial Internacional en tiempo real, entre otras.
+🇲🇽 Sitio web desarrollado con Angular y TypeScript, SCSS, Bootstrap y Materialize, publicado con Firebase Hosting y conectado al catálogo de APIs de la NASA (api.nasa.gov).
 
-🇺🇸 This website allows you to consult some of the most popular APIs provided by NASA, among them is the one that shows the images taken during Mars exploration missions, where you can filter them by a date or Martian day, as long as they are within the range of the mission, or the one that allows you to track the current location of the International Space Station in real time, among others.
+🇺🇸 Website developed with Angular and TypeScript, SCSS, Bootstrap and Materialize, published with Firebase Hosting and connected to the NASA API catalog (api.nasa.gov).
 
 🔗 https://nasadb-2fe0e.web.app/astronomy/picture-of-the-day
 
 
-![nasa](https://github.com/user-attachments/assets/58c47d10-5ad0-409f-892b-2f94c4cb44e1)
+![nasa](https://github.com/user-attachments/assets/4daf6477-2688-4869-9a59-7a4ce502dd76)
 
 
 # NasaDB
