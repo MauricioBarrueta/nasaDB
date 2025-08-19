@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IssService } from './service/iss.service';
-import { catchError, Subject, takeUntil, tap, throwError } from 'rxjs';
+import { catchError, EMPTY, Subject, takeUntil, tap, timeout } from 'rxjs';
 import { Iss } from './interface/iss';
 import { Router } from '@angular/router';
 
@@ -19,8 +19,7 @@ export class ISSComponent implements OnInit, OnDestroy {
   lonText!: string 
   src!: string  
 
-  errorText: string | null = null; // null = sin error
-
+  alertText: boolean = false
   
   //? -- Los Subject sirven de 'puente' entre los Observables y las Subscripciones
   private readonly onDestroy = new Subject<void>()
@@ -38,21 +37,29 @@ export class ISSComponent implements OnInit, OnDestroy {
   getIssCurrLoc() {
     this.issService.getCurrentPosition()
     .pipe(
+      timeout(5000),
       catchError(error => {        
-        return throwError(() => error)
+        console.error(error)
+        /* Se muestra el mensaje de error y se asignan valores por defecto a variables e imágen */
+        this.alertText = true
+        this.lat = 0, this.latText = 'S/D'
+        this.lon = 0, this.lonText = 'S/D'
+        this.src = 'https://upload.wikimedia.org/wikipedia/commons/d/d0/International_Space_Station.svg'
+        /* Se completa inmediatamente el flujo */
+        return EMPTY
       }),
-      //? -- Al ser llamado el método onDestroy, automáticamente se desuscribe del Observable, para ahorrar memoria
       takeUntil(this.onDestroy),
       tap((res: Iss) => {    
-        this.lat = res.iss_position.latitude 
+        this.alertText = false
+        this.lat = res.latitude
         this.latText = this.lat.toString().includes('-') ? 'Sur' : 'Norte'
 
-        this.lon = res.iss_position.longitude
-        this.lonText = this.lon.toString().includes('-') ? 'Oeste' : 'Este'
+        this.lon = res.longitude;
+        this.lonText = this.lon.toString().includes('-') ? 'Oeste' : 'Este';
 
         this.src = `https://maps.google.com/maps?q=${this.lat},${this.lon}&t=h&z=3&hl=es&ie=UTF8&iwloc=&output=embed`
       })
     )
-    .subscribe()    
-  }  
+    .subscribe()
+  }
 }

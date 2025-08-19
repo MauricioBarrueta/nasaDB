@@ -6,5 +6,6 @@
         <small>&#xf05a; Para mover el mapa, haz clic sobre él y mantén presionado. Para ajustar el zoom, presiona la tecla Ctrl + scroll del mouse &#xf8cc;. Para actualizar la información, simplemente vuelve a colocar el cursor &#xf245; sobre el mapa &#xf05a;</small>        
     </span>      
 
+    <small class="error-alert-txt w-100 pt-3 text-center" [ngClass]="alertText ? 'd-inline-block' : 'd-none'">&#xf071; Ocurrió un error en la API, por favor inténtalo más tarde &#xf06a;</small>
     <iframe class="mt-3 rounded" (mouseenter)="getIssCurrLoc()" [src]="src | safe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></iframe>          
 </div>

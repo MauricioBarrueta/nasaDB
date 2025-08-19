@@ -64,7 +64,7 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
           this.manifest = res
           /* Verifica si existe algún parámetro en alguno de los input para obtener la lista de cámaras */
           if (!this.earthDateValue && !this.solDayValue) {
-            this.cameras = []
+            this.cameras = [], this.photos$ = []
             return
           }
           const photos = res.photos
@@ -83,7 +83,7 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
 
   /* Controla los cambios en los inputs, se limpia la lista de cámaras, resetea los valores y dispara la actualización del manifest */
   onSolDateChange() {
-    this.earthDateValue = '', this.cameras = []       
+    this.earthDateValue = '', this.cameras = []    
     this.dropdownTitle = 'Lista de cámaras'
     this.dateInput.next()
   }
