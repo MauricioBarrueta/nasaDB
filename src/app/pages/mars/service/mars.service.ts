@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
@@ -14,7 +14,7 @@ export class MarsService {
 
   /* Obtiene el Manifest (datos) dependiendo el Rover que se seleccionó */
   getRoverManifest(rover: string): Observable<PhotoManifest> {
-    return this.http.get<PhotoManifestResponse>(`${environment.url}mars-photos/api/v1/manifests/${rover}?api_key=${environment.key}`)
+    return this.http.get<PhotoManifestResponse>(`${environment.marsUrl}/manifests/${rover}`)
       .pipe(
         map((res: PhotoManifestResponse) => {
           return res.photo_manifest
@@ -22,23 +22,19 @@ export class MarsService {
       )
   }
 
-  /* Obtiene la lista de fotografías de acuerdo al día terrestre y la cámara seleccionada */
-  getPhotosByEarthDate(rover: string, date: string, camera: string): Observable<MarsPhotos[]> {
-    return this.http.get<MarsResponse>(`${environment.url}mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&camera=${camera}&api_key=${environment.key}`)
-    .pipe(
-      map((res: MarsResponse) => {
-        return res.photos
-      })
-    )
-  }
-
-  /* Obtiene la lista de fotografías de acuerdo al día marciano y a la cámara seleccionada */
-  getPhotosBySolDate(rover: string, sol: number, camera: string): Observable<MarsPhotos[]> {
-    return this.http.get<MarsResponse>(`${environment.url}mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&camera=${camera}&api_key=${environment.key}`)
-    .pipe(
-        map((res: MarsResponse) => {
-          return res.photos
-        })
-      )
+  /* Obtiene la lista de imágenes de acuerdo al día solar/fecha terrestre y a la cámara seleccionada */
+  getPhotos( rover: string, camera: string, options: { earth_date?: string; sol?: number }): Observable<MarsPhotos[]> {
+    /* Parámetros creados dinámicamente */
+    let params = new HttpParams().set('camera', camera)
+    if (options.earth_date) {
+      params = params.set('earth_date', options.earth_date)
+    }
+    if (options.sol !== undefined) {
+      params = params.set('sol', options.sol.toString())
+    }
+    return this.http.get<MarsResponse>(`${environment.marsUrl}/rovers/${rover}/photos`, { params })
+      .pipe(
+        map(res => res.photos)
+      );
   }
 }

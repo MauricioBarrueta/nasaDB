@@ -1,10 +1,17 @@
 @import url(../../../app.component.scss);
 
+#overlay { /* Manifest Error */
+    background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(6px); z-index: 99999; 
+    span { font-size: 20px; color: var(--smookyBlack); }
+    a { font-size: 16px; color: var(--oriolesOrange); }
+}
+
 .photos-container, .mission-subtitle, .inputs-container, .select-container {
     display: flex; align-items: center; justify-content: center; flex-direction: column;
 }
 .photos-container {    
     justify-content: flex-start; padding: 4em 0 1em 0;
+    .title { top: -8px; }
 
     .mission-subtitle, .dropdown-toggle { 
         background: rgba(252, 60, 35, .8) !important; backdrop-filter: blur(2px) !important; -webkit-backdrop-filter: blur(2px) !important;
@@ -41,10 +48,10 @@
         input {
             width: 250px;
             font-size: 15px; font-weight: normal; letter-spacing: 1px;
-            border-bottom: 1px solid rgba($color: white, $alpha: .75); color: var(--white);
+            border-bottom: 1px solid rgba($color: white, $alpha: .5); color: var(--white);
             &::placeholder {
-                font-size: 14px; font-style: italic; 
-                color: rgba($color: #FFF, $alpha: 0.6);
+                font-size: 13px; font-style: italic; 
+                color: rgba($color: #FFF, $alpha: 0.75);
             }      
         }
     }

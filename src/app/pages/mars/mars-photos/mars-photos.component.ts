@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MarsService } from '../service/mars.service';
 import { PhotoManifest } from './interface/photo-manifest';
-import { catchError, debounceTime, distinctUntilChanged, finalize, Subject, takeUntil, tap, throwError } from 'rxjs';
+import { catchError, debounceTime, finalize, Subject, takeUntil, tap, throwError } from 'rxjs';
 import { MarsPhotos } from '../interface/mars-photos';
 import { environment } from '../../../../environments/environment.development';
 
@@ -30,6 +30,8 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
   imgNotFoundTxt!: string
   inputFocus: boolean = false 
 
+  errorLoadingManifest: boolean = false
+
   //? -- Los Subject sirven de 'puente' entre los Observables y las Subscripciones
   private readonly onDestroy = new Subject<void>()
   
@@ -50,28 +52,37 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
     this.onDestroy.complete()
   }
 
-  /* Se obtienen los datos generales del rover seleccionado */
+  /* Se obtienen los datos generales del rover seleccionado */  
   getRoverManifest() {
     this.gettingCamList = true
     this.dropdownTitle = 'Obteniendo lista...'
 
     this.marsPhotoService.getRoverManifest(this.rover.toLowerCase())
       .pipe(
-        catchError(error => throwError(() => error)),
         //?-- Al ser llamado el método onDestroy, automáticamente se desuscribe del Observable, para ahorrar memoria
         takeUntil(this.onDestroy),
         tap((res: PhotoManifest) => {
           this.manifest = res
-          /* Verifica si existe algún parámetro en alguno de los input para obtener la lista de cámaras */
-          if (!this.earthDateValue && !this.solDayValue) {
-            this.cameras = [], this.photos$ = []
+          /* Se muestra el mensaje de alerta si el manifest no retornó nada */
+          if (!res) {
+            this.errorLoadingManifest = true
             return
           }
-          const photos = res.photos
+          /* Limpia los arrays si ninguna de las fechas tiene valor */
+          if (!this.earthDateValue && !this.solDayValue) {
+            this.cameras = []
+            this.photos$ = []
+            return
+          }
           /* Se filtran los resultados según el tipo de fecha ingresada, si existe se asigna la lista al arreglo */
-          let dateData = this.solDayValue ? photos.find((p: any) => p.sol === this.solDayValue)
-            : photos.find((p: any) => p.earth_date === this.earthDateValue)
+          const dateData = res.photos.find((p: any) =>
+            this.solDayValue ? p.sol === this.solDayValue : p.earth_date === this.earthDateValue
+          )
           this.cameras = dateData ? dateData.cameras : []
+        }),
+        catchError(error => {
+          this.errorLoadingManifest = true
+          return throwError(() => error)
         }),
         finalize(() => {
           this.gettingCamList = false
@@ -118,17 +129,21 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
 
   /* Se obtienen las imágenes tomadas por la cámara seleccionada de acuerdo al día solar o fecha terrestre */  
   getPhotosList() {
-    const photosObservable = this.solDayValue === 0 ? this.marsPhotoService.getPhotosByEarthDate(this.rover, this.earthDateValue, this.cameraValue)
-      : this.marsPhotoService.getPhotosBySolDate(this.rover, this.solDayValue, this.cameraValue)      
-      photosObservable
-        .pipe(
-          catchError(error => throwError(() => error)),
-          takeUntil(this.onDestroy),
-          tap((res: MarsPhotos[]) => {
-            this.photos$ = res
-            if (res.length === 0) this.imgNotFoundTxt = `\u{f05e} ${environment.notFoundText}`
-          })
-        )
-    .subscribe()
-  }  
+    const isEarthDate = this.solDayValue === 0    
+    const photos$ = this.marsPhotoService.getPhotos(this.rover, this.cameraValue, isEarthDate 
+      ? { earth_date: this.earthDateValue } : { sol: this.solDayValue }
+    )
+    photos$
+      .pipe(
+        catchError(error => throwError(() => error)),
+        takeUntil(this.onDestroy),
+        tap((res: MarsPhotos[]) => {
+          this.photos$ = res;
+          if (res.length === 0) {
+            this.imgNotFoundTxt = `\u{f05e} ${environment.notFoundText}`
+          }
+        })
+      )
+      .subscribe();
+  }
 }

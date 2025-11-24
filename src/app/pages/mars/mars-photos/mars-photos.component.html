@@ -1,13 +1,21 @@
 <app-header></app-header>
 
+<!-- Manifest Error Alert -->
+@if (errorLoadingManifest) {
+  <div id="overlay" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center flex-column gap-2 p-3 cursor-default">
+    <span class="fw-bold text-center">Ocurrió un error al obtener la información del rover, inténtalo más tarde</span>
+    <a class="fw-bold" href="/mars-exploration/photos">&#xf2ea; Regresar</a>
+  </div>
+}
+
 <div class="photos-container w-100 min-vh-100 position-relative">
-    <h1 class="title">Misión Rover {{rover}} &nbsp;<img src="/rover.png"></h1>
+    <h1 class="title">Misión: Rover {{rover}} <img src="/rover.png"></h1>
     <div class="mission-subtitle w-100 text-center">
-        <p class="px-3">Lanzamiento: <span>{{manifest.launch_date}}</span></p>
-        <p class="px-3">Aterrizaje: <span>{{manifest.landing_date}}</span></p>
-        <p class="px-3">Último día terrestre: <span>{{manifest.max_date}}</span></p>
-        <p class="px-3">Último día marciano: <span>{{manifest.max_sol}}</span></p>
-        <p class="px-3">Estado: <span>{{manifest.status}}</span></p>               
+        <p class="px-3">Lanzamiento: <span>{{ manifest.launch_date || 'N/A' }}</span></p>
+        <p class="px-3">Aterrizaje: <span>{{ manifest.landing_date || 'N/A' }}</span></p>
+        <p class="px-3">Último día terrestre: <span>{{ manifest.max_date || 'N/A' }}</span></p>
+        <p class="px-3">Último día marciano: <span>{{ manifest.max_sol || 'N/A' }}</span></p>
+        <p class="px-3">Estado: <span>{{ manifest.status || 'N/A' }}</span></p>               
     </div>
     
     <!-- Inputs -->
@@ -19,7 +27,7 @@
         <label for="earth-date-input" class="form-label"><img src="/earth.png"> Fecha terrestre:</label>
         <input [type]="inputFocus ? 'date' : 'text'" id="earth-date-input" class="form-control text-center m-0 px-1" [max]="manifest?.max_date" [min]="manifest?.landing_date" [(ngModel)]="earthDateValue" (keyup)="earthDatePrevention($event)" 
           placeholder="Ej. {{manifest.landing_date}}" (focus)="inputFocus = true" (blur)="inputFocus = false" (ngModelChange)="onEarthDateChange()">
-        </div>
+      </div>
       <div class="input-group w-auto">
         <label for="mars-date-input" class="form-label"><img src="/mars.png"> Día marciano:</label>
         <input type="number" #solDate id="mars-date-input" class="form-control text-center m-0 px-1" [max]="manifest?.max_sol" min="0" placeholder="Ej. 1000" [(ngModel)]="solDayValue" (keyup)="martianDatePrevention($event)" (ngModelChange)="onSolDateChange()">         
@@ -35,7 +43,7 @@
           <li *ngFor="let cam of cameras; let i = index" (click)="onListClick(i)"><a class="dropdown-item">• {{cam}}</a></li>          
         </ul>
       </div> 
-      <small class="pt-3">&#xf05a; Algunas imágenes pueden tardar en cargarse. En ese caso, espere unos momentos después de seleccionar la cámara &#xf05a;</small>
+      <small class="pt-4">&#xf05a; Algunas imágenes pueden tardar en cargarse. En ese caso, espere unos momentos después de seleccionar la cámara &#xf05a;</small>
     </div>     
     
     <!-- Photos Container -->    
