@@ -1,11 +1,12 @@
 <app-header></app-header>
 
 <div class="iss-container w-100 min-vh-100 position-relative">
-    <h1 class="title"><img src="ISS-2.png">&nbsp; Seguimiento de la Estación Espacial Internacional (EEI) en tiempo real &nbsp;<img src="/ISS.png"></h1>
+    <h1 class="title"><img src="ISS-2.png">&nbsp; Seguimiento de la Estación Espacial Internacional en tiempo real &nbsp;<img src="/ISS.png"></h1>
     <span class="container-title">La EEI se encuentra actualmente en las coordenadas: {{lat}} {{latText}}, {{lon}} {{lonText}}.
-        <small>&#xf05a; Para mover el mapa, haz clic sobre él y mantén presionado. Para ajustar el zoom, presiona la tecla Ctrl + scroll del mouse &#xf8cc;. Para actualizar la información, simplemente vuelve a colocar el cursor &#xf245; sobre el mapa &#xf05a;</small>        
+        <small class="fw-bold fs-14">Velocidad: {{vel}}</small>
+        <small>Para mover el mapa, haz clic sobre él y mantén presionado. Para ajustar el zoom, presiona la tecla <em>Ctrl + scroll</em> del mouse &#xf8cc;. Para actualizar la información, simplemente vuelve a colocar el cursor &#xf245; sobre el mapa</small>        
     </span>      
 
-    <small class="error-alert-txt w-100 pt-3 text-center" [ngClass]="alertText ? 'd-inline-block' : 'd-none'">&#xf071; Ocurrió un error en la API, por favor inténtalo más tarde &#xf06a;</small>
-    <iframe class="mt-3 rounded" (mouseenter)="getIssCurrLoc()" [src]="src | safe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></iframe>          
+    <small class="error-alert-txt w-100 pt-3 text-center" [ngClass]="alertText ? 'd-inline-block' : 'd-none'">&#xf071; Ocurrió un error en la API, por favor inténtalo más tarde</small>
+    <iframe class="mt-3 rounded bg-white" (mouseenter)="getIssCurrLoc()" [src]="src | safe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></iframe>          
 </div>

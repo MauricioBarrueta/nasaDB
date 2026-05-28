@@ -11,11 +11,11 @@
 <div class="photos-container w-100 min-vh-100 position-relative">
     <h1 class="title">Misión: Rover {{rover}} <img src="/rover.png"></h1>
     <div class="mission-subtitle w-100 text-center">
-        <p class="px-3">Lanzamiento: <span>{{ manifest.launch_date || 'N/A' }}</span></p>
-        <p class="px-3">Aterrizaje: <span>{{ manifest.landing_date || 'N/A' }}</span></p>
-        <p class="px-3">Último día terrestre: <span>{{ manifest.max_date || 'N/A' }}</span></p>
-        <p class="px-3">Último día marciano: <span>{{ manifest.max_sol || 'N/A' }}</span></p>
-        <p class="px-3">Estado: <span>{{ manifest.status || 'N/A' }}</span></p>               
+        <p class="px-3">Lanzamiento: <span>{{ manifest.launch_date || 'S/D' }}</span></p>
+        <p class="px-3">Aterrizaje: <span>{{ manifest.landing_date || 'S/D' }}</span></p>
+        <p class="px-3">Último día terrestre: <span>{{ manifest.max_date || 'S/D' }}</span></p>
+        <p class="px-3">Último día marciano: <span>{{ manifest.max_sol || 'S/D' }}</span></p>
+        <p class="px-3">Estado: <span>{{ manifest.status || 'S/D' }}</span></p>               
     </div>
     
     <!-- Inputs -->
@@ -43,7 +43,7 @@
           <li *ngFor="let cam of cameras; let i = index" (click)="onListClick(i)"><a class="dropdown-item">• {{cam}}</a></li>          
         </ul>
       </div> 
-      <small class="pt-4">&#xf05a; Algunas imágenes pueden tardar en cargarse. En ese caso, espere unos momentos después de seleccionar la cámara &#xf05a;</small>
+      <small class="pt-4">&#xf05a; Algunas imágenes pueden tardar en cargarse. En ese caso, espere unos momentos después de seleccionar la cámara</small>
     </div>     
     
     <!-- Photos Container -->    

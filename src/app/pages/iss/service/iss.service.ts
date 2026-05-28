@@ -13,9 +13,6 @@ export class IssService {
 
   /* Se obtienen las coordenadas actuales de la Estación Espacial Internacional */
   getCurrentPosition(): Observable<Iss> {
-    return this.http.get<Iss>(`${environment.ISSurl}`)
-    .pipe(
-      map((res: Iss) => { return res })
-    )
+    return this.http.get<Iss>(environment.ISSurl)
   }
 }

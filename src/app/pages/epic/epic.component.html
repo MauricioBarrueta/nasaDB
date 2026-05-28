@@ -3,10 +3,10 @@
 <div class="epic-container w-100 min-vh-100 position-relative">
     <h1 class="title"><img src="/earth.png">&nbsp; Fotografías tomadas por la cámara EPIC (Earth Polychromatic Imaging Camera) del satélite DSCOVR &nbsp;<img src="/dscovr.png"></h1>
 
-    <span class="container-title">Lista de fotografías de la Tierra capturadas a aproximadamente 1 500 000 km de distancia, correspondientes a la fecha {{dateQuery}}:
+    <span class="container-title">Lista de fotografías de la Tierra capturadas a ~1.5 millones de km de distancia, en la fecha <em>{{dateQuery}}</em>:
         <small>Presiona las teclas &#x2190; y &#x2192; o los botones laterales para recorrer todas las imágenes</small>
     </span>
-    <small class="error-alert-txt w-100 pt-3 text-center" [ngClass]="alertText ? 'd-inline-block' : 'd-none'">&#xf071; Ocurrió un error en la API al obtener las imágenes más recientes, se están mostrando las últimas disponibles &#xf06a;</small>
+    <small class="error-alert-txt w-100 pt-3 text-center" [ngClass]="alertText ? 'd-inline-block' : 'd-none'"><i class="fw-thin">&#xf071;</i> Ocurrió un error en la API al obtener las imágenes más recientes, se están mostrando las últimas disponibles</small>
     <div id="earthPhotos" class="carousel slide carousel-fade h-auto">
         <div class="carousel-indicators">
           <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->

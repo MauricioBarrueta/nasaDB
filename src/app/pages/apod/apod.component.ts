@@ -17,7 +17,7 @@ export class APODComponent implements OnInit, OnDestroy {
 
   apod$!: APOD
   date!: any
-  mediaType!: string //* Para validar si es imagen o video
+  mediaType: string = '' //* Para validar si es imagen o video
   mediaVideoUrl!: string
 
   title: string = ''

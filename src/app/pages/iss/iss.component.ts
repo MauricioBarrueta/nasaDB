@@ -15,9 +15,10 @@ export class ISSComponent implements OnInit, OnDestroy {
 
   lat!: number | string
   lon!: number | string
+  vel!: number | string
   latText!: string 
   lonText!: string 
-  src!: string  
+  src: string = ''  
 
   alertText: boolean = false
   
@@ -37,13 +38,14 @@ export class ISSComponent implements OnInit, OnDestroy {
   getIssCurrLoc() {
     this.issService.getCurrentPosition()
     .pipe(
-      timeout(5000),
+      // timeout(5000),
       catchError(error => {        
         console.error(error)
         /* Se muestra el mensaje de error y se asignan valores por defecto a variables e imágen */
         this.alertText = true
         this.lat = 0, this.latText = 'S/D'
         this.lon = 0, this.lonText = 'S/D'
+        this.vel = 'S/D'
         this.src = 'https://upload.wikimedia.org/wikipedia/commons/d/d0/International_Space_Station.svg'
         /* Se completa inmediatamente el flujo */
         return EMPTY
@@ -55,7 +57,11 @@ export class ISSComponent implements OnInit, OnDestroy {
         this.latText = this.lat.toString().includes('-') ? 'Sur' : 'Norte'
 
         this.lon = res.longitude;
-        this.lonText = this.lon.toString().includes('-') ? 'Oeste' : 'Este';
+        this.lonText = this.lon.toString().includes('-') ? 'Oeste' : 'Este'
+
+        this.vel = `${res.velocity.toLocaleString('es-MX', {
+          minimumFractionDigits: 2, maximumFractionDigits: 2,
+        })} km/h`
 
         this.src = `https://maps.google.com/maps?q=${this.lat},${this.lon}&t=h&z=3&hl=es&ie=UTF8&iwloc=&output=embed`
       })
