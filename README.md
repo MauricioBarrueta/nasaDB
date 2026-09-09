@@ -1,9 +1,8 @@
-🇲🇽 Sitio web desarrollado con Angular y TypeScript, SCSS, Bootstrap y Materialize, publicado con Firebase Hosting y conectado al catálogo de APIs de la NASA (api.nasa.gov).
+🇲🇽 Sitio web desarrollado con Angular y TypeScript, SCSS, Bootstrap y Materialize CSS, publicado con Firebase Hosting y conectado a las APIs de la NASA.
 
-🇺🇸 Website developed with Angular and TypeScript, SCSS, Bootstrap and Materialize, published with Firebase Hosting and connected to the NASA API catalog (api.nasa.gov).
+🇺🇸 Website developed with Angular and TypeScript, using SCSS, Bootstrap, and Materialize CSS, deployed on Firebase Hosting and connected to NASA APIs.
 
 🔗 https://nasadb-2fe0e.web.app/astronomy/picture-of-the-day
-
 
 <img width="1366" height="653" alt="nasa" src="https://github.com/user-attachments/assets/17dc9842-eb3a-4624-9424-87aaedb054fa" />
 
