@@ -1,37 +1,41 @@
 <app-header></app-header>
 
 <div class="epic-container w-100 min-vh-100 position-relative">
-    <h1 class="title"><img src="/earth.png">&nbsp; Fotografías tomadas por la cámara EPIC (Earth Polychromatic Imaging Camera) del satélite DSCOVR &nbsp;<img src="/dscovr.png"></h1>
+  <h1 class="title"><img src="/earth.png">&nbsp; Fotografías tomadas por la cámara EPIC (Earth Polychromatic Imaging Camera) del satélite DSCOVR &nbsp;<img src="/dscovr.png"></h1>
 
-    <span class="container-title">Fotografías de la Tierra capturadas a ~1.5 millones de km de distancia el {{dateQuery}}
-        <small>Usa las teclas &#x2190; y &#x2192; o los botones laterales para recorrer las imágenes</small>
-    </span>
-    <small class="error-alert-txt w-100 justify-content-center align-items-center gap-3 p-3 pb-3 pb-md-0 text-center" [ngClass]="alertText ? 'd-inline-flex' : 'd-none'">
-      <i class="fa-solid fa-warning"></i>Las imágenes de hoy aún no están disponibles. Se muestran las más recientes
-    </small>
+  <span class="container-title">Fotografías de la Tierra capturadas a ~1.5 millones de km de distancia el {{dateQuery}}
+    <small>Usa las teclas &#x2190; y &#x2192; o los botones laterales para recorrer las imágenes</small>
+  </span>
+  <small class="error-alert-txt w-100 justify-content-center align-items-center gap-3 p-3 pb-3 pb-md-0 text-center" [ngClass]="alertText ? 'd-inline-flex' : 'd-none'">
+    <i class="fa-solid fa-warning"></i>Las imágenes de hoy aún no están disponibles. Se muestran las más recientes
+  </small>
 
-    <div id="earthPhotos" class="carousel slide carousel-fade h-auto">
-        <div class="carousel-indicators">
-          <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->
-          <button type="button" data-bs-target="#earthPhotos" *ngFor="let epic of epic$; let i = index" aria-current="true"
-            attr.data-bs-slide-to="{{i}}" [ngClass]="i == 0 ? 'active' : ''"  attr.aria-label="Slide {{i}}">
-          </button>        
-        </div>   
-
-        <div class="carousel-inner">
-          <!--* Agrega la clase 'active' solamente al primer elemento -->
-          <div *ngFor="let image of imageData$; let i = index" class="h-100 position-relative" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'">
-            <span class="photo-info position-absolute text-center">{{image.date}} | Posición del DSCOVR: Lat. {{image.lat}}, Lon. {{image.lon}}</span>
-            <img src="{{image.src}}" class="d-block w-100">
-            <span class="photo-info position-absolute text-center caption">{{image.caption}}</span>
-          </div> 
-        </div>   
-        
-        <button class="carousel-control-prev" type="button" data-bs-target="#earthPhotos" data-bs-slide="prev">&#xf053;</button>
-        <button class="carousel-control-next" type="button" data-bs-target="#earthPhotos" data-bs-slide="next">&#xf054;</button> 
+  <div id="earthPhotos" class="carousel slide carousel-fade h-auto">
+    <div class="carousel-indicators">
+      <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->
+      @for (epic of epic$; track epic; let i = $index) {
+        <button type="button" data-bs-target="#earthPhotos" aria-current="true"
+          attr.data-bs-slide-to="{{i}}" [ngClass]="i == 0 ? 'active' : ''"  attr.aria-label="Slide {{i}}">
+        </button>
+      }
     </div>
 
-    <a class="container-title page-link mt-4 pt-3" target="_blank" href="https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/dscovr-deep-space-climate-observatory">
-      ¿Quieres conocer más sobre el satélite Deep Space Climate Observatory (DSCOVR)? Haz clic aquí
-    </a>       
+    <div class="carousel-inner">
+      <!--* Agrega la clase 'active' solamente al primer elemento -->
+      @for (image of imageData$; track image; let i = $index) {
+        <div class="h-100 position-relative" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'">
+          <span class="photo-info position-absolute text-center">{{image.date}} | Posición del DSCOVR: Lat. {{image.lat}}, Lon. {{image.lon}}</span>
+          <img src="{{image.src}}" class="d-block w-100">
+          <span class="photo-info position-absolute text-center caption">{{image.caption}}</span>
+        </div>
+      }
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#earthPhotos" data-bs-slide="prev">&#xf053;</button>
+    <button class="carousel-control-next" type="button" data-bs-target="#earthPhotos" data-bs-slide="next">&#xf054;</button>
+  </div>
+
+  <a class="container-title page-link mt-4 pt-3" target="_blank" href="https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/dscovr-deep-space-climate-observatory">
+    ¿Quieres conocer más sobre el satélite Deep Space Climate Observatory (DSCOVR)? Haz clic aquí
+  </a>
 </div>
