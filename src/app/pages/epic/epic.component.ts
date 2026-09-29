@@ -6,9 +6,10 @@ import { environment } from '../../../environments/environment.development';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-epic',
-  templateUrl: './epic.component.html',
-  styleUrl: './epic.component.scss'
+    selector: 'app-epic',
+    templateUrl: './epic.component.html',
+    styleUrl: './epic.component.scss',
+    standalone: false
 })
 export class EpicComponent implements OnInit, OnDestroy {
 

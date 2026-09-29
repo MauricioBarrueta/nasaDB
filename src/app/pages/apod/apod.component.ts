@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-apod',
-  templateUrl: './apod.component.html',
-  styleUrl: './apod.component.scss'
+    selector: 'app-apod',
+    templateUrl: './apod.component.html',
+    styleUrl: './apod.component.scss',
+    standalone: false
 })
 
 export class APODComponent implements OnInit, OnDestroy {

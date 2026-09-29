@@ -5,9 +5,10 @@ import { Iss } from './interface/iss';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-iss',
-  templateUrl: './iss.component.html',
-  styleUrl: './iss.component.scss'
+    selector: 'app-iss',
+    templateUrl: './iss.component.html',
+    styleUrl: './iss.component.scss',
+    standalone: false
 })
 export class ISSComponent implements OnInit, OnDestroy {  
   

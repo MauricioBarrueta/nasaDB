@@ -7,9 +7,10 @@ import { MarsPhotos } from '../interface/mars-photos';
 import { environment } from '../../../../environments/environment.development';
 
 @Component({
-  selector: 'app-mars-photos',
-  templateUrl: './mars-photos.component.html',
-  styleUrl: './mars-photos.component.scss'
+    selector: 'app-mars-photos',
+    templateUrl: './mars-photos.component.html',
+    styleUrl: './mars-photos.component.scss',
+    standalone: false
 })
 export class MarsPhotosComponent implements OnInit, OnDestroy {
 

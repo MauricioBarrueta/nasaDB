@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-mars',
-  templateUrl: './mars.component.html',
-  styleUrl: './mars.component.scss'
+    selector: 'app-mars',
+    templateUrl: './mars.component.html',
+    styleUrl: './mars.component.scss',
+    standalone: false
 })
 export class MarsComponent {  
 
