@@ -19,12 +19,11 @@
     .carousel-item {
         width: 550px;                
         .photo-info, .caption { font-size: 10px !important; }
-        .caption { bottom: 5px !important; top: revert !important; }
+        .caption { bottom: 4px !important; top: revert !important; }
     }   
 }
 
 @media screen and (max-width: 670px) {
-    .container-title { margin-top: 3.25rem; }
     .carousel {
         padding-inline: 1em;
         .carousel-inner {

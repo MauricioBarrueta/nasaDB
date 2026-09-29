@@ -66,7 +66,10 @@ export class EpicComponent implements OnInit, OnDestroy {
     this.imageData$ = []
     array.forEach(photo => {
       const date = photo.date.substring(0, 10).split('-').join('/'); /* YYYY/mm/dd */
-      this.dateQuery = date
+      
+      /* dd de mm. de YYYY */
+      this.dateQuery = new Date(photo.date.substring(0, 10) + 'T00:00:00')
+        .toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }).replace(/^(\d+) ([a-z]{3})\.? (\d{4})$/, '$1 de $2. de $3')
 
       this.imageData$.push({
         src: `${environment.epicImgUrl}/${date}/png/${photo.image}.png`,
