@@ -3,11 +3,11 @@
 <div class="epic-container w-100 min-vh-100 position-relative">
   <h1 class="title"><img src="/earth.png">&nbsp; Fotografías tomadas por la cámara EPIC (Earth Polychromatic Imaging Camera) del satélite DSCOVR &nbsp;<img src="/dscovr.png"></h1>
 
-  <span class="container-title">Fotografías de la Tierra capturadas a ~1.5 millones de km de distancia el {{dateQuery}}
-    <small>Usa las teclas &#x2190; y &#x2192; o los botones laterales para recorrer las imágenes</small>
+  <span class="container-title">Fotografías de la Tierra capturadas a ~1.5 millones de km de distancia el {{dateQuery}}.
+    <small>Usa las teclas &#x2190; y &#x2192; o los botones laterales para recorrer las imágenes.</small>
   </span>
-  <small class="error-alert-txt w-100 justify-content-center align-items-center gap-3 p-3 pb-3 pb-md-0 text-center" [ngClass]="alertText ? 'd-inline-flex' : 'd-none'">
-    <i class="fa-solid fa-warning"></i>Las imágenes de hoy aún no están disponibles. Se muestran las más recientes
+  <small class="warning-alert-txt w-100 justify-content-center align-items-center gap-3 p-3 pb-3 pb-md-0 text-center" [ngClass]="alertText ? 'd-inline-flex' : 'd-none'">
+    <i class="fa-solid fa-warning"></i>Las imágenes de hoy aún no están disponibles. Se muestran las más recientes.
   </small>
 
   <div id="earthPhotos" class="carousel slide carousel-fade h-auto">

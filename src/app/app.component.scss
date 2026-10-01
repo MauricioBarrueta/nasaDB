@@ -16,11 +16,12 @@
     padding: 5px; color: white; border-bottom: 5px double var(--oriolesOrange); 
     small {
         width: 100%; display: inline-block;
-        font-size: 13px; letter-spacing: 1px; padding-top: 10px;
+        letter-spacing: 1px; padding-top: 10px;
     }
 } 
 
-.error-alert-txt { font-size: 13px; font-weight: bold; color: var(--oriolesOrange); }
+.error-alert-txt { font-weight: bold; letter-spacing: normal !important; color: var(--oriolesOrange); }
+.warning-alert-txt { font-weight: bold; letter-spacing: normal !important; color: var(--warningOrange); }
 
 .error-message {
     width: 100%; padding: 5px 5px 10px 5px; 
@@ -35,8 +36,9 @@
             transform: translateX(-50%); transition: all .35s;
             img { border-radius: 5px; border: 2px solid var(--roseRed); }
             .photo-info {
-                width: 100%; top: 3%; left: 0;
+                width: 100%; left: 0;
                 font-size: 11px; font-weight: bold; line-height: 2; color: white; 
+                background-color: rgba($color: #0E0E0E, $alpha: 0.5); border: 2px solid var(--roseRed); border-radius: 5px 5px 0 0; border-bottom: 0;
             }
         }
     }

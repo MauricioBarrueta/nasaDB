@@ -19,9 +19,11 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
   rover!: string
   manifest!: any
   earthDateValue!: string 
-  solDayValue!: number 
+  solDayValue: number | null = null
   
   dateInput = new Subject<void>()
+
+  private initialLoad = true
 
   cameras: string[] = []
   cameraValue!: string
@@ -45,6 +47,7 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => { this.getRoverManifest() })
     
+    this.dropdownTitle = 'Lista de cámaras'
     this.getRoverManifest()
   }
 
@@ -53,10 +56,15 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
     this.onDestroy.complete()
   }
 
-  /* Se obtienen los datos generales del rover seleccionado */  
+  /* Se obtienen los datos generales del rover seleccionado */    
   getRoverManifest() {
     this.gettingCamList = true
-    this.dropdownTitle = 'Obteniendo lista...'
+    this.photos$ = []
+     this.imgNotFoundTxt = ''
+
+    if (!this.initialLoad) {
+      this.dropdownTitle = 'Obteniendo lista...'
+    }
 
     this.marsPhotoService.getRoverManifest(this.rover.toLowerCase())
       .pipe(
@@ -64,22 +72,26 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy),
         tap((res: PhotoManifest) => {
           this.manifest = res
+
           /* Se muestra el mensaje de alerta si el manifest no retornó nada */
           if (!res) {
             this.errorLoadingManifest = true
             return
           }
+
           /* Limpia los arrays si ninguna de las fechas tiene valor */
-          if (!this.earthDateValue && !this.solDayValue) {
+          if (!this.earthDateValue && this.solDayValue === null) {
             this.cameras = []
             this.photos$ = []
             return
           }
-          /* Se filtran los resultados según el tipo de fecha ingresada, si existe se asigna la lista al arreglo */
+
+          /* Se filtran los resultados según el tipo de fecha ingresada, si existe se asigna la lista al arreglo */         
           const dateData = res.photos.find((p: any) =>
-            this.solDayValue ? p.sol === this.solDayValue : p.earth_date === this.earthDateValue
-          )
+            this.solDayValue != null ? p.sol === this.solDayValue : p.earth_date === this.earthDateValue)
+
           this.cameras = dateData ? dateData.cameras : []
+          this.dropdownTitle = this.cameras.length ? 'Lista de cámaras' : 'Ninguna cámara disponible'
         }),
         catchError(error => {
           this.errorLoadingManifest = true
@@ -87,7 +99,7 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
         }),
         finalize(() => {
           this.gettingCamList = false
-          this.dropdownTitle = 'Lista de cámaras'
+          this.initialLoad = false
         })
       )
       .subscribe()
@@ -101,7 +113,18 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
   }
 
   onEarthDateChange() {
-    this.solDayValue = 0, this.cameras = []
+    /* Ajusta la fecha ingresada si supera la última fecha disponible o es anterior al aterrizaje del rover */
+    if (this.manifest && this.earthDateValue) {
+      if (this.earthDateValue > this.manifest.max_date) {
+        this.earthDateValue = this.manifest.max_date
+      }
+      if (this.earthDateValue < this.manifest.landing_date) {
+        this.earthDateValue = this.manifest.landing_date
+      }
+    }
+
+    this.solDayValue = null
+    this.cameras = []
     this.dropdownTitle = 'Lista de cámaras'
     this.dateInput.next()
   }
@@ -109,16 +132,12 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
   /* Para validar si los valores ingresados no exceden el límite obtenido del manifest */
   solDayValidation!: boolean 
   earthDateValidation!: boolean
+
   martianDatePrevention(event: any) {
     let length = event.target.value.length
     this.solDayValidation = event.target.value > this.manifest.max_sol ? (event.target.value = event.target.value.slice(0, length - 1), false) : true    
     this.dateInput.next()
-  }
-  earthDatePrevention(event: any) { 
-    let length = event.target.value.length
-    this.earthDateValidation = event.target.value > this.manifest.max_date ? (event.target.value = event.target.value.slice(0, length - 1), false) : true    
-    this.dateInput.next()
-  }
+  }  
 
   /* Obtiene el valor seleccionado en la lista de cámaras y se obtienen las imágenes */
   onListClick(index: number) {
@@ -130,10 +149,12 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
 
   /* Se obtienen las imágenes tomadas por la cámara seleccionada de acuerdo al día solar o fecha terrestre */  
   getPhotosList() {
+    this.imgNotFoundTxt = ''
+
     const isEarthDate = this.solDayValue === 0    
-    const photos$ = this.marsPhotoService.getPhotos(this.rover, this.cameraValue, isEarthDate 
-      ? { earth_date: this.earthDateValue } : { sol: this.solDayValue }
-    )
+    const photos$ = this.marsPhotoService.getPhotos(
+      this.rover, this.cameraValue, isEarthDate ? { earth_date: this.earthDateValue } : { sol: this.solDayValue! })
+
     photos$
       .pipe(
         catchError(error => throwError(() => error)),
@@ -141,7 +162,7 @@ export class MarsPhotosComponent implements OnInit, OnDestroy {
         tap((res: MarsPhotos[]) => {
           this.photos$ = res;
           if (res.length === 0) {
-            this.imgNotFoundTxt = `\u{f05e} ${environment.notFoundText}`
+            this.imgNotFoundTxt = `\u{f071}\u00A0 ${environment.notFoundText}`
           }
         })
       )

@@ -4,6 +4,6 @@ export const environment = {
     epicImgUrl: 'https://epic.gsfc.nasa.gov/archive/natural',
     marsUrl: 'https://rovers.nebulum.one/api/v1',
     key: 'WrGGICCNPDb2XbZgIVhF4fwZbt7tpk01PlYpVKhp',    
-    ISSurl: 'https://api.wheretheiss.at/v1/satellites/25544',    
-    notFoundText: 'Parece que esta cámara no capturó ninguna imagen en esta fecha. Intenta consultar las otras cámaras o intenta con otra fecha.'
+    ISSurl: 'https://api.wheretheiss.at/v1/satellites/25544',
+    notFoundText: 'Esta cámara no capturó imágenes en la fecha seleccionada. Prueba con otra cámara o fecha.'
 };

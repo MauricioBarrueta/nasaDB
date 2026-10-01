@@ -1,9 +1,16 @@
 @import url(../../../app.component.scss);
 
 #overlay { /* Manifest Error */
-    background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(6px); z-index: 99999; 
-    span { font-size: 20px; color: var(--smookyBlack); }
-    a { font-size: 16px; color: var(--oriolesOrange); }
+    background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(6px); z-index: 99999; 
+    span { font-size: 20px; }
+    
+    a { 
+        font-size: 16px; color: var(--smookyBlack);
+        margin-top: 10px; transition: all .25s;
+        &:hover { color: var(--midnightBlue); }
+        i { font-size: 14px; }
+        
+    }
 }
 
 .photos-container, .mission-subtitle, .inputs-container, .select-container {
@@ -39,6 +46,8 @@
     .inputs-container {
         flex-direction: row; flex-wrap: wrap; justify-content: space-evenly;
         padding: 0 0.5rem 1em 0.5rem;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+
         label, input { height: 35px; font-weight: bold; }
         label {
             margin: 0 5px 0 0; 
@@ -59,9 +68,13 @@
     .select-container {
         z-index: 2;
         padding-bottom: 1em; border-bottom: 5px double var(--oriolesOrange); 
-        .dropdown-toggle {
+        .dropdown {
+            cursor: not-allowed;
+
+            .dropdown-toggle {
             font-size: 14px; font-weight: bold; text-transform: none;
             &::after { vertical-align: .2em; }
+            &:disabled { border: 1px solid rgba($color: #FFF, $alpha: 0.5) !important; }
         }       
         .dropdown-menu {
             li {
@@ -73,8 +86,8 @@
                     &:hover { color: var(--oriolesOrange); }
                 }
             }
-        }                
-        small { font-size: 10px; letter-spacing: 1px; color: white; }
+        }  
+        }                      
     }
 }
 

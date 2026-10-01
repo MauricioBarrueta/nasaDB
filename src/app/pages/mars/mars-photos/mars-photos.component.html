@@ -2,79 +2,93 @@
 
 <!-- Manifest Error Alert -->
 @if (errorLoadingManifest) {
-  <div id="overlay" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center flex-column gap-2 p-3 cursor-default">
-    <span class="fw-bold text-center">Ocurrió un error al obtener la información del rover, inténtalo más tarde</span>
-    <a class="fw-bold" href="/mars-exploration/photos">&#xf2ea; Regresar</a>
+  <div id="overlay" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center flex-column gap-3 cursor-default">
+    <span class="error-alert-txt text-center">
+      <i class="fa-solid fa-circle-exclamation me-3"></i>No se pudo obtener la información del rover. Inténtalo de nuevo más tarde.
+    </span>
+    <a routerLink="/mars-exploration/photos"><i class="fa-solid fa-rotate-left me-2"></i>Regresar</a>
   </div>
 }
 
 <div class="photos-container w-100 min-vh-100 position-relative">
   <h1 class="title">Misión: Rover {{rover}} <img src="/rover.png"></h1>
   <div class="mission-subtitle w-100 text-center">
-    <p class="px-3">Lanzamiento: <span>{{ manifest.launch_date || 'S/D' }}</span></p>
-    <p class="px-3">Aterrizaje: <span>{{ manifest.landing_date || 'S/D' }}</span></p>
-    <p class="px-3">Último día terrestre: <span>{{ manifest.max_date || 'S/D' }}</span></p>
+    <p class="px-3">Lanzamiento: <span>{{ manifest.launch_date ? (manifest.launch_date | date:'dd/MM/yyyy') : 'S/D' }}</span></p>
+    <p class="px-3">Aterrizaje: <span>{{ manifest.landing_date ? (manifest.landing_date | date:'dd/MM/yyyy') : 'S/D' }}</span></p>
+    <p class="px-3">Último día terrestre: <span>{{ manifest.max_date ? (manifest.max_date | date:'dd/MM/yyyy') : 'S/D' }}</span></p>
     <p class="px-3">Último día marciano: <span>{{ manifest.max_sol || 'S/D' }}</span></p>
     <p class="px-3">Estado: <span>{{ manifest.status || 'S/D' }}</span></p>
   </div>
 
-  <!-- Inputs -->
-  <span class="container-title pt-2 pb-3 border-bottom-0">1. Ingresa una fecha terrestre o un día marciano para mostrar las imágenes capturadas en ese período. Ten en cuenta que existe la posibilidad de que el rover
-    {{rover[0].toUpperCase() + rover.slice(1)}} no haya tomado fotografías en la fecha ingresada:
-  </span>
+  <!-- Inputs -->  
+  <span class="container-title pt-2 pb-3 border-bottom-0">
+    1. Ingresa una fecha terrestre o un día marciano para mostrar las imágenes capturadas en esa fecha.
+    <small class="warning-alert-txt w-100 d-inline-flex justify-content-center align-items-center gap-3 text-center">
+      <i class="fa-solid fa-triangle-exclamation"></i>Ten en cuenta que el rover {{ rover[0].toUpperCase() + rover.slice(1) }} podría no haber tomado fotografías ese día.
+    </small>
+  </span>  
+  
   <div class="inputs-container w-100">
     <div class="input-group w-auto">
       <label for="earth-date-input" class="form-label"><img src="/earth.png"> Fecha terrestre:</label>
-      <input [type]="inputFocus ? 'date' : 'text'" id="earth-date-input" class="form-control text-center m-0 px-1" [max]="manifest?.max_date" [min]="manifest?.landing_date" [(ngModel)]="earthDateValue" (keyup)="earthDatePrevention($event)"
-        placeholder="Ej. {{manifest.landing_date}}" (focus)="inputFocus = true" (blur)="inputFocus = false" (ngModelChange)="onEarthDateChange()">
-      </div>
-      <div class="input-group w-auto">
-        <label for="mars-date-input" class="form-label"><img src="/mars.png"> Día marciano:</label>
-        <input type="number" #solDate id="mars-date-input" class="form-control text-center m-0 px-1" [max]="manifest?.max_sol" min="0" placeholder="Ej. 1000" [(ngModel)]="solDayValue" (keyup)="martianDatePrevention($event)" (ngModelChange)="onSolDateChange()">
-      </div>
+      <input [type]="inputFocus ? 'date' : 'text'" id="earth-date-input" class="form-control text-center m-0 px-1" [max]="manifest?.max_date" [min]="manifest?.landing_date" [(ngModel)]="earthDateValue" (blur)="onEarthDateChange()" placeholder="Ej. {{manifest.landing_date}}" (focus)="inputFocus = true">
     </div>
 
-    <!-- Cameras List -->
-    <span class="container-title sub pt-2 pb-3 border-bottom-0">2. Espera a que cargue la lista y selecciona una cámara para ver las imágenes. Si la que elegiste no capturó nada en ese momento, prueba con otra o ingresa una fecha distinta.</span>
-    <div class="select-container w-100">
-      <div class="dropdown">
-        <button class="btn btn-dark dropdown-toggle border border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" [disabled]="gettingCamList || cameras.length === 0">&#xf03a; {{dropdownTitle}}&nbsp;</button>
-        <ul class="dropdown-menu w-100">
-          @for (cam of cameras; track cam; let i = $index) {
-            <li (click)="onListClick(i)"><a class="dropdown-item">• {{cam}}</a></li>
-          }
-        </ul>
-      </div>
-      <small class="pt-4">&#xf05a; Algunas imágenes pueden tardar en cargarse. En ese caso, espere unos momentos después de seleccionar la cámara</small>
-    </div>
-
-    <!-- Photos Container -->
-    @if (photos$.length >= 1) {
-      <span class="container-title p-2 border-bottom-0">Lista de imágenes capturadas por la cámara {{cameraValue.toUpperCase()}}
-        del rover {{rover[0].toUpperCase() + rover.slice(1)}} en la fecha o día marciano ingresado: <small>Presiona las teclas &#x2190; y &#x2192; o los botones laterales para recorrer todas las imágenes</small>
-      </span>
-    } @else {
-      <span class="container-title pb-2 border-bottom-0">{{imgNotFoundTxt}}</span>
-    }
-    <div id="marsPhotosCarousel" class="carousel slide carousel-fade h-auto">
-      <div class="carousel-indicators">
-        <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->
-        @for (photos of photos$; track photos; let i = $index) {
-          <button type="button" data-bs-target="#marsPhotosCarousel" attr.data-bs-slide-to="{{i}}"
-            [ngClass]="i == 0 ? 'active' : ''" aria-current="true" attr.aria-label="Slide {{i}}">
-          </button>
-        }
-      </div>
-      <div class="carousel-inner">
-        <!--* Agrega la clase 'active' solamente al primer elemento -->
-        @for (photo of photos$; track photo; let i = $index) {
-          <div class="h-100 position-relative" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'">
-            <span class="photo-info position-absolute text-center">{{cameraValue.toUpperCase()}} | {{photo.earth_date}} | Sol: {{photo.sol}}</span>
-            <img src="{{photo.img_src}}" class="d-block w-100">
-          </div>
-        }
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#marsPhotosCarousel" data-bs-slide="prev">&#xf053;</button>
-      <button class="carousel-control-next" type="button" data-bs-target="#marsPhotosCarousel" data-bs-slide="next">&#xf054;</button>
+    <div class="input-group w-auto">
+      <label for="mars-date-input" class="form-label"><img src="/mars.png"> Día marciano:</label>
+      <input type="number" #solDate id="mars-date-input" class="form-control text-center m-0 px-1" [max]="manifest?.max_sol" min="0" placeholder="Ej. 1000" [(ngModel)]="solDayValue" (keyup)="martianDatePrevention($event)" (ngModelChange)="onSolDateChange()">
     </div>
   </div>
+
+  <!-- Cameras List -->
+  <span class="container-title sub pt-2 pb-3 border-bottom-0">2. Espera a que cargue la lista y selecciona una cámara para ver las imágenes. Si la cámara seleccionada no tomó fotografías en esa fecha, prueba con otra o ingresa una fecha distinta.</span>
+  <div class="select-container w-100">
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle border border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" [disabled]="gettingCamList || cameras.length === 0">&#xf03a; {{dropdownTitle}}&nbsp;</button>
+      <ul class="dropdown-menu w-100">
+        @for (cam of cameras; track cam; let i = $index) {
+          <li (click)="onListClick(i)"><a class="dropdown-item">• {{cam}}</a></li>
+        }
+      </ul>
+    </div>
+    <small class="warning-alert-txt w-100 d-inline-flex justify-content-center align-items-center gap-3 text-center pt-3">
+      <i class="fa-solid fa-circle-info"></i>Algunas fotografías pueden tardar unos momentos en cargar.
+    </small>
+  </div>
+
+  <!-- Photos Container -->
+  @if (photos$.length >= 1) {
+    <span class="container-title p-2 border-bottom-0">
+      Imágenes capturadas por la cámara {{cameraValue.toUpperCase()}} del rover {{rover[0].toUpperCase() + rover.slice(1)}} para la fecha ingresada.
+      <small>Usa las teclas &#x2190; y &#x2192; o los botones laterales para recorrer las imágenes.</small>
+    </span>
+  } @else {
+    <span class="error-alert-txt w-100 d-inline-flex justify-content-center align-items-center gap-3 text-center pt-3">
+      {{ imgNotFoundTxt }}
+    </span>
+  }
+
+  <div id="marsPhotosCarousel" class="carousel slide carousel-fade h-auto">
+    <div class="carousel-indicators">
+      <!--* Agrega la clase 'active' al primer elemento y asigna el 'index' a los atributos correspondientes -->
+      @for (photos of photos$; track photos; let i = $index) {
+        <button type="button" data-bs-target="#marsPhotosCarousel" attr.data-bs-slide-to="{{i}}"
+          [ngClass]="i == 0 ? 'active' : ''" aria-current="true" attr.aria-label="Slide {{i}}">
+        </button>
+      }
+    </div>
+
+    <div class="carousel-inner">
+      <!--* Agrega la clase 'active' solamente al primer elemento -->
+      @for (photo of photos$; track photo; let i = $index) {
+        <div class="h-100 position-relative" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'">
+          <span class="photo-info position-absolute text-center">{{cameraValue.toUpperCase()}} | {{photo.earth_date | date:'dd/MM/yyyy' }} | Sol: {{photo.sol}}</span>
+          <img src="{{photo.img_src}}" class="d-block w-100">
+        </div>
+      }
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#marsPhotosCarousel" data-bs-slide="prev">&#xf053;</button>
+    <button class="carousel-control-next" type="button" data-bs-target="#marsPhotosCarousel" data-bs-slide="next">&#xf054;</button>
+  </div>
+</div>

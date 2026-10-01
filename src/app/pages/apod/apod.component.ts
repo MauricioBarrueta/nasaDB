@@ -18,7 +18,6 @@ export class APODComponent implements OnInit, OnDestroy {
 
   apod$!: APOD
   date!: any
-  mediaType: string = '' //* Para validar si es imagen o video
   mediaVideoUrl!: string
 
   title: string = ''
@@ -39,8 +38,6 @@ export class APODComponent implements OnInit, OnDestroy {
 
   /* Se obtiene la imagen astronómica del día */
   getPictureOfTheDay() {
-    this.router.navigate(['astronomy/picture-of-the-day'])
-
     this.apodService.getPictureOfTheDay(this.date)
     .pipe(
       catchError(error => {        
@@ -49,9 +46,21 @@ export class APODComponent implements OnInit, OnDestroy {
       //? -- Al ser llamado el método onDestroy, automáticamente se desuscribe del Observable, para ahorrar memoria
       takeUntil(this.onDestroy),
       tap((res: APOD) => {
-        this.apod$ = res        
-        this.mediaType = this.apod$.media_type 
-        this.title = this.mediaType !== 'video' ? 'Esta es la imagen astronómica del día de hoy' : 'Este es el video astronómico del día de hoy'     
+        this.apod$ = res            
+        
+        switch (this.apod$.media_type) {
+          case 'image':
+            this.title = 'Esta es la imagen astronómica del día'
+            break
+
+          case 'video':
+            this.title = 'Este es el video astronómico del día'
+            break
+            
+          default:
+            this.title = 'Este es el contenido astronómico del día'
+        }
+
         this.mediaVideoUrl = `${this.apod$.url}?autoplay=1&mute=1&enablejsapi=1`
       })
     )

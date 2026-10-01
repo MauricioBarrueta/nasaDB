@@ -2,8 +2,8 @@
 
 .rovers-cards-container {
     display: flex; align-items: center; justify-content: center; flex-direction: row; flex-wrap: wrap;
-    position: relative; width: 100%; min-height: 90vh;
-    padding: 4em 1em 1em 1em; gap: 25px;
+    position: relative; width: 100%; min-height: 86vh;
+    padding: 10em 1em 1em 1em; gap: 25px;
 
     .card {
         width: 300px; height: 225px; justify-content: center; align-items: center;
@@ -38,6 +38,7 @@
 
 @media screen and (max-width: 995px) {
     .rovers-cards-container {
+        padding-top: 4em !important; 
         .card { margin-top: 9em; }
         .card:nth-child(4) { margin-top: 3em; }
     }    

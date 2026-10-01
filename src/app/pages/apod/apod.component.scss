@@ -1,6 +1,7 @@
 @import url(../../app.component.scss);
 
 .card-container {
+    min-height: 100vh;
     display: flex; justify-content: center; align-items: center; flex-wrap: wrap; flex-direction: row;    
     padding: 4.5rem 0 1em 0;
 
@@ -9,8 +10,9 @@
         background-color: transparent; color: white;
         border: 2px solid var(--roseRed);
         .card-image {
+            background-color: rgba($color: #0E0E0E, $alpha: 0.75);
             img, iframe { 
-                max-height: 400px; object-fit: cover;
+                max-height: 400px; object-fit: contain;
                 border-radius: 5px 5px 0 0; border-bottom: 5px solid var(--roseRed); 
             }
             .card-title { font-size: 18px; font-weight: bold; }            
@@ -19,25 +21,23 @@
             backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
             background-color: rgba(255, 255, 255, 0.15);
             .text, .copyright {
-                font-size: 13px; text-align: justify; line-height: 1.75; font-weight: bold;
+                font-size: 12px; text-align: justify; line-height: 1.75; font-weight: 500;
             }
             .copyright {
-                font-size: 12px;
-                border-bottom: 1px dotted var(--white);
+                font-size: 14px;
+                border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
             }
         }
         .card-action {
-            background-color: rgba(186, 30, 104, .8); color: white !important;
+            display: flex; align-items: center; justify-content: space-between;
+            background-color: rgba(186, 30, 104, 1); color: white !important;
             a {
+                display: flex; align-items: center; justify-content: center; 
                 font-size: 14px; text-decoration: none !important; text-transform: none !important; font-weight: bold;
                 color: white !important; transition: 0.35s !important;
-                &:hover { font-weight: normal !important; }
-                img {
-                    width: 20px; height: 20px;
-                    margin-bottom: 2px; filter: invert(100%); 
-                }
+                &:hover { font-weight: normal !important; }                
             }
-            #img-date { font-size: 11px; line-height: 2; float: right; }
+            #img-date { font-size: 12px; color: white !important; }
         }        
     }
 }
@@ -48,7 +48,7 @@
         .card { 
             margin-top: 2.5rem; 
             .card-content, .card-action {
-                .text, .copyright, a { font-size: 12px; }
+                .copyright, a { font-size: 12px; }
             }
             .card-action { padding: 0.75rem; } 
         }
