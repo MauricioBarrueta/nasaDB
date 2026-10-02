@@ -26,7 +26,7 @@
         <div class="h-100 position-relative" [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'">
           <span class="photo-info position-absolute text-center">{{image.date}} | Posición del DSCOVR: Lat. {{image.lat}}, Lon. {{image.lon}}</span>
           <img src="{{image.src}}" class="d-block w-100">
-          <span class="photo-info position-absolute text-center caption">{{image.caption}}</span>
+          <span class="photo-info position-absolute text-center caption border-0 bg-transparent">{{image.caption}}</span>
         </div>
       }
     </div>
