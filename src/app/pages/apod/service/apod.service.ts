@@ -13,7 +13,7 @@ export class APODService {
 
   /* Se obtiene la imagen astronómica del día (APOD por sus siglas en inglés) */
   getPictureOfTheDay(date: string): Observable<APOD> {
-    return this.http.get<APOD>(`${environment.url}planetary/apod?date=${date}&api_key=${environment.key}`)
+    return this.http.get<APOD>(`${environment.apodUrl}${date}`)
       .pipe(
         map((res: APOD) => { return res })
       )

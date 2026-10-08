@@ -7,22 +7,32 @@
     <div class="card">      
       <div class="card-image">
         @if (apod$.media_type === 'image') {
-          <img [src]="apod$.url">
+          <img [src]="apod$.hdurl" [alt]="apod$.alt">
         } @else if (apod$.media_type === 'video') {
           <iframe width="100%" height="400px" [src]="mediaVideoUrl | safe" frameborder="0" allow="autoplay"></iframe>
         } @else {
           <img src="https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg">
         }
-        <span class="card-title py-2 px-3">{{ apod$.title }}</span>
+
+        <div class="img-data d-flex">
+          <span class="card-title py-2 px-3">{{ apod$.title }}</span>
+          <p class="py-2 px-3" id="img-date">{{ apod$.date | date: 'dd MMM yyyy' }}</p>
+        </div>
       </div>
 
-      <div class="card-content p-3">
-        @if (apod$.copyright !== undefined) {
-          <p class="copyright text-center pb-2 mb-1">&copy; {{apod$.date.substring(0,4)}} {{ apod$.copyright }}</p>
+      <div class="card-content p-3">        
+        @if (apod$.copyright) {
+          <details class="copyright text-center pb-2">
+            <summary>
+              &copy; {{ apod$.date.substring(0, 4) }} Créditos de la imagen
+            </summary>
+            <p class="mt-2 mb-0" [innerHTML]="apod$.copyright"></p>
+          </details>
         } @else {
-          <p class="copyright text-center pb-1 mb-1">&copy; {{apod$.date.substring(0,4)}} NASA</p>
+          <p class="copyright text-center pb-2">&copy; {{ apod$.date.substring(0, 4) }} NASA</p>
         }
-        <p class="text">{{apod$.explanation}}</p>
+
+        <p class="text mt-2" [innerHTML]="apod$.explanation"></p>      
       </div>
 
       <div class="card-action p-3">
@@ -35,7 +45,9 @@
             <i class="fa-brands fa-youtube me-3"></i>Ver video en YouTube
           </a>
         }
-        <p id="img-date"><b>Fecha: </b>{{ apod$.date | date: 'dd/MM/yyyy' }}</p>
+        <a class="m-0" [href]="apod$.permalink" target="_blank">
+            <i class="fa-solid fa-circle-info me-3"></i>Ver información completa
+        </a>
       </div>
     </div>
   }

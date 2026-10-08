@@ -1,5 +1,6 @@
 export const environment = {
     url: 'https://api.nasa.gov/',
+    apodUrl: 'https://science.nasa.gov/wp-json/wp/v2/apod-basic/',
     epicUrl: 'https://epic.gsfc.nasa.gov/api/natural',
     epicImgUrl: 'https://epic.gsfc.nasa.gov/archive/natural',
     marsUrl: 'https://rovers.nebulum.one/api/v1',

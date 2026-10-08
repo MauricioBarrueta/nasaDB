@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { APODService } from './service/apod.service';
 import { catchError, Subject, takeUntil, tap, throwError } from 'rxjs';
 import { APOD } from './interface/apod';
-import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -14,7 +13,7 @@ import { DatePipe } from '@angular/common';
 
 export class APODComponent implements OnInit, OnDestroy {
 
-  constructor(private apodService: APODService, private router: Router, private datePipe: DatePipe) { }
+  constructor(private apodService: APODService, private datePipe: DatePipe) { }
 
   apod$!: APOD
   date!: any
@@ -27,7 +26,7 @@ export class APODComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {     
     //* Se obtiene la fecha actual con el formato especificado
-    this.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.date = this.datePipe.transform(new Date(), 'yyMMdd');
     this.getPictureOfTheDay()       
   }
 
@@ -47,6 +46,15 @@ export class APODComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroy),
       tap((res: APOD) => {
         this.apod$ = res            
+
+        this.apod$.explanation = this.setLinksToNewTab(this.apod$.explanation)
+        if (this.apod$.copyright) {
+          this.apod$.copyright = this.setLinksToNewTab(this.apod$.copyright)
+        }
+
+        if (this.apod$.media_type === 'video') {
+          this.mediaVideoUrl = this.getVideoUrl(this.apod$.basic_html)
+        }
         
         switch (this.apod$.media_type) {
           case 'image':
@@ -60,10 +68,20 @@ export class APODComponent implements OnInit, OnDestroy {
           default:
             this.title = 'Este es el contenido astronómico del día'
         }
-
-        this.mediaVideoUrl = `${this.apod$.url}?autoplay=1&mute=1&enablejsapi=1`
       })
     )
     .subscribe()    
+  }
+
+  /* Se agregan atributos para abrir los enlaces en una nueva pestaña */
+  private setLinksToNewTab(html: string): string {
+    return html.replace(/<a\b/gi, '<a target="_blank" rel="noopener noreferrer"')
+  }
+
+  /* Obtiene la URL del video desde el iframe incluido en basic_html */
+  private getVideoUrl(html: string): string {
+    const match = html.match(/<iframe[^>]+src=["']([^"']+)["']/i) /* Busca la etiqueta iframe y captura el contenido de su atributo src */
+
+    return match ? `https:${match[1]}` : ''
   }
 }

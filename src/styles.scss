@@ -8,11 +8,16 @@ html { scroll-behavior: smooth; }
 html, body { position: relative; cursor: default; }
 body {     
     min-height: 95vh;
-    background: rgb(14,14,14); background: linear-gradient(0deg, rgba(14,14,14,1) 0%, rgba(10,60,145,1) 50%); 
+    background: rgb(14,14,14); background: linear-gradient(0deg, rgb(14, 14, 14) 0%, rgb(10, 60, 145) 80%); 
 }
 p, h1 { margin-bottom: 0 !important; }
 
-a { text-decoration: none !important; }
+a { 
+    text-decoration: none !important; color: #FFF; 
+    &:hover { color: var(--warningOrange); }
+}
+
+nav ul a:hover { color: #FFF; }
 
 .fs-14 { font-size: 14px !important; }
 
